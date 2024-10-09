@@ -16,5 +16,5 @@ public class ProducerEntityManager {
     @RequestScoped
     private EntityManager beanEntityManager() {
         return em;
-    } //test
+    } //test2
 }
