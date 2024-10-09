@@ -1,0 +1,150 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/main.xhtml">
+
+    <ui:define name="content">
+
+        <div class="card crud-demo">
+            <h:form id="form">
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="header grid justify-content-center" style="margin: 1rem">
+                    <p:commandButton value="Volver" icon="pi pi-chevron-left" style="margin-right: 2rem"
+                                     process="@this"
+                                     action="#{escalaCalificacionController.volverAMalla}"
+                                     styleClass="ui-button-info">
+                    </p:commandButton>
+                    <h1 style="margin: 0.5rem">#{filtroController.filtroMalla.descripcion}</h1>
+                </div>
+
+                <p:divider />
+
+                <div class="header grid justify-content-center">
+                    <h2 style="margin: 0.5rem">ESCALA DE CALIFICACION</h2>
+                </div>
+
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{escalaCalificacionController.listado}"
+                             reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
+                             paginator="true" rows="8" paginatorPosition="bottom">
+
+                    <f:facet name="header">
+                        <div class="table-header grid">
+                            <div class="col-3" style="font-weight: bold">
+                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{escalaCalificacionController.resetSeleccionado}"
+                                                 update=":dialogs :dialogs:manage-content"
+                                                 oncomplete="PF('manageDialog').show()"
+                                                 styleClass="ui-button-info w-full" style="margin-right: .5rem">
+                                    <p:resetInput target=":dialogs:manage-content"/>
+                                </p:commandButton>
+                            </div>
+                            <div class="col-9">
+                                <span class="w-full filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                                    <p:inputText id="globalFilter" class="w-full" onkeyup="PF('dtListado').filter()" placeholder="Busqueda por cualquiera de los campos"/>
+                                </span>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}">
+                        <h:outputText value="#{registro.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje 2" sortBy="#{registro.puntaje2}" filterBy="#{registro.puntaje2}">
+                        <h:outputText value="#{registro.puntaje2}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje 3" sortBy="#{registro.puntaje3}" filterBy="#{registro.puntaje3}">
+                        <h:outputText value="#{registro.puntaje3}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje 4" sortBy="#{registro.puntaje4}" filterBy="#{registro.puntaje4}">
+                        <h:outputText value="#{registro.puntaje4}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje 5" sortBy="#{registro.puntaje5}" filterBy="#{registro.puntaje5}">
+                        <h:outputText value="#{registro.puntaje5}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje 5F" sortBy="#{registro.puntaje5f}" filterBy="#{registro.puntaje5f}">
+                        <h:outputText value="#{registro.puntaje5f}"/>
+                    </p:column>
+
+                    <p:column exportable="false" ariaHeaderText="Actions">
+                        <div class="grid justify-content-center">
+                            <p:commandButton icon="pi pi-pencil" update=":dialogs :dialogs:manage-content" style="margin: 0.25rem"
+                                             oncomplete="PF('manageDialog').show()"
+                                             styleClass="edit-button rounded-button ui-button-success"
+                                             title="Editar"
+                                             process="@this">
+                                <f:setPropertyActionListener value="#{registro}" target="#{escalaCalificacionController.seleccionado}"/>
+                                <p:resetInput target=":dialogs:manage-content"/>
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Eliminar"
+                                             oncomplete="PF('deleteDialog').show()">
+                                <f:setPropertyActionListener value="#{registro}" target="#{escalaCalificacionController.seleccionado}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
+            <h:form id="dialogs">
+                <p:dialog header="#{escalaCalificacionController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
+                          responsive="true">
+                    <p:outputPanel id="manage-content" class="ui-fluid">
+                        <p:outputPanel rendered="#{not empty escalaCalificacionController.seleccionado}">
+                            <div class="field">
+                                <p:outputLabel for="puntaje2">Puntaje 2</p:outputLabel>
+                                <p:inputNumber id="puntaje2" value="#{escalaCalificacionController.seleccionado.puntaje2}" required="true"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="puntaje3">Puntaje 3</p:outputLabel>
+                                <p:inputNumber id="puntaje3" value="#{escalaCalificacionController.seleccionado.puntaje3}" required="true"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="puntaje4">Puntaje 4</p:outputLabel>
+                                <p:inputNumber id="puntaje4" value="#{escalaCalificacionController.seleccionado.puntaje4}" required="true"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="puntaje5">Puntaje 5</p:outputLabel>
+                                <p:inputNumber id="puntaje5" value="#{escalaCalificacionController.seleccionado.puntaje5}" required="true"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="puntaje5f">Puntaje 5F</p:outputLabel>
+                                <p:inputNumber id="puntaje5f" value="#{escalaCalificacionController.seleccionado.puntaje5f}" required="true"/>
+                            </div>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{escalaCalificacionController.save}"
+                                         update="manage-content" process="manage-content @this"/>
+                        <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
+                                         class="ui-button-secondary" type="button"/>
+                    </f:facet>
+                </p:dialog>
+
+                <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
+                                 message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{escalaCalificacionController.delete}"
+                                     process="@this" oncomplete="PF('deleteDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteDialog').hide()"/>
+                </p:confirmDialog>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

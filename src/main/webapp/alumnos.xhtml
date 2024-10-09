@@ -1,0 +1,161 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/main.xhtml">
+
+    <ui:define name="content">
+
+        <div class="card crud-demo">
+            <h:form id="form">
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="header grid justify-content-center">
+                    <h1 style="margin: 0.5rem">ALUMNOS</h1>
+                </div>
+
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{alumnoController.listado}"
+                             reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
+                             paginator="true" rows="10" paginatorPosition="bottom">
+                    <f:facet name="header">
+                        <div class="table-header grid">
+                            <div class="col-3" style="font-weight: bold">
+                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{alumnoController.resetSeleccionado}"
+                                                 update=":dialogs :dialogs:manage-content"
+                                                 oncomplete="PF('manageDialog').show()"
+                                                 styleClass="ui-button-info w-full" style="margin-right: .5rem">
+                                    <p:resetInput target=":dialogs:manage-content"/>
+                                </p:commandButton>
+                            </div>
+                            <div class="col-9">
+                                <span class="w-full filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                                    <p:inputText id="globalFilter" class="w-full" onkeyup="PF('dtListado').filter()" placeholder="Busqueda por cualquiera de los campos"/>
+                                </span>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}">
+                        <h:outputText value="#{registro.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre" sortBy="#{registro.nombre}" filterBy="#{registro.nombre}">
+                        <h:outputText value="#{registro.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Apellido" sortBy="#{registro.apellido}" filterBy="#{registro.apellido}">
+                        <h:outputText value="#{registro.apellido}"/>
+                    </p:column>
+
+                    <p:column headerText="Nro Cedula" sortBy="#{registro.nroCedula}" filterBy="#{registro.nroCedula}">
+                        <h:outputText value="#{registro.nroCedula}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha Nacimiento" sortBy="#{registro.fechaNacimiento}" filterBy="#{registro.fechaNacimiento}">
+                        <h:outputText value="#{registro.fechaNacimiento}">
+                            <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Telefono" sortBy="#{registro.telefono}" filterBy="#{registro.telefono}">
+                        <h:outputText value="#{registro.telefono}"/>
+                    </p:column>
+
+                    <p:column headerText="Email" sortBy="#{registro.email}" filterBy="#{registro.email}">
+                        <h:outputText value="#{registro.email}"/>
+                    </p:column>
+
+                    <p:column exportable="false" ariaHeaderText="Actions">
+                        <div class="grid justify-content-center flex-nowrap">
+                            <p:commandButton icon="pi pi-pencil" update=":dialogs :dialogs:manage-content" style="margin: 0.25rem"
+                                             oncomplete="PF('manageDialog').show()"
+                                             styleClass="edit-button rounded-button ui-button-success"
+                                             title="Editar"
+                                             process="@this">
+                                <f:setPropertyActionListener value="#{registro}" target="#{alumnoController.seleccionado}"/>
+                                <p:resetInput target=":dialogs:manage-content"/>
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Eliminar"
+                                             oncomplete="PF('deleteDialog').show()">
+                                <f:setPropertyActionListener value="#{registro}" target="#{alumnoController.seleccionado}"/>
+                            </p:commandButton>
+                            <p:divider layout="vertical" />
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-book" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Ver inscripciones"
+                                             action="#{alumnoController.irAInscripcionesMallas}">
+                                <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroAlumno}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <h:form id="dialogs">
+                <p:dialog header="#{alumnoController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
+                          responsive="true">
+                    <p:outputPanel id="manage-content" class="ui-fluid">
+                        <p:outputPanel rendered="#{not empty alumnoController.seleccionado}">
+                            <div class="field">
+                                <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                                <p:inputText id="nombre" value="#{alumnoController.seleccionado.nombre}"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="apellido">Apellido</p:outputLabel>
+                                <p:inputText id="apellido" value="#{alumnoController.seleccionado.apellido}"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="nro_cedula">Nro Cedula</p:outputLabel>
+                                <p:inputText id="nro_cedula" value="#{alumnoController.seleccionado.nroCedula}"/>
+                            </div>
+                            <div class="field">
+                                <h:outputLabel for="fechaNacimiento" value="Fecha Nacimiento" />
+                                <p:datePicker pattern="yyyy-MM-dd" id="fechaNacimiento" value="#{alumnoController.seleccionado.fechaNacimiento}"
+                                              required="true"
+                                              converterMessage="Indique la fecha con yyyy-MM-dd" >
+                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                                    <f:passThroughAttribute name="type" value="date"/>
+                                </p:datePicker>
+                            </div>
+
+                            <div class="field">
+                                <p:outputLabel for="telefono">Telefono</p:outputLabel>
+                                <p:inputText id="telefono" value="#{alumnoController.seleccionado.telefono}"/>
+                            </div>
+
+                            <div class="field">
+                                <p:outputLabel for="email">Email</p:outputLabel>
+                                <p:inputText id="email" value="#{alumnoController.seleccionado.email}"/>
+                            </div>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{alumnoController.save}"
+                                         update="manage-content" process="manage-content @this"/>
+                        <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
+                                         class="ui-button-secondary" type="button"/>
+                    </f:facet>
+                </p:dialog>
+
+                <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
+                                 message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{alumnoController.delete}"
+                                     process="@this" oncomplete="PF('deleteDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteDialog').hide()"/>
+                </p:confirmDialog>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

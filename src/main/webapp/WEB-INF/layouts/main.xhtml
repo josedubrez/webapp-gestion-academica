@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="#{lenguajeController.locale}">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        locale="es">
+
+    <h:head>
+        <meta charset="UTF-8"/>
+        <title>#{titulo}</title>
+        <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+        <link rel="icon" type="image/x-icon" href="#{resource['img/icono.ico']}"/>
+        <ui:insert name="head"/>
+
+        <style>
+            #menu_principal .menu h3 {
+                background-color: var(--bluegray-900);
+            }
+            #menu_principal .menu h3:hover {
+                background-color: var(--bluegray-800);
+            }
+            .main-header {
+                background: var(--bluegray-900);
+            }
+            .field {
+                min-width: 400px;
+            }
+        </style>
+
+    </h:head>
+
+    <h:body style="margin: 0">
+        <p:card class="min-h-screen" style="border-radius: 0">
+            <f:facet name="title">
+                <div class="grid justify-content-start main-header">
+                    <div class="col-1">
+                        <img src="resources/img/logo.png" width="120px" height="90px" alt="logo"/>
+                    </div>
+                    <div class="col-7 grid align-items-center">
+                        <h:outputText value="Sistema de Gestion Academica"/>
+                    </div>
+                    <div class="col-4 grid justify-content-end align-items-center">
+                         <span style="font-weight: bold; font-size: 1rem">Usuario: ADMIN</span>
+                         <p:button value="Cerrar Sesion" icon="pi pi-fw pi-sign-out" styleClass="ui-button-danger" style="margin-left: 1rem"/>
+                    </div>
+                </div>
+            </f:facet>
+            <div class="grid">
+                <div class="col-12 md:col-2">
+                    <p:panelMenu id="menu_principal">
+                        <p:submenu class="menu" label="Referenciales">
+                            <p:menuitem value="Ciudades" outcome="ciudades"/>
+                            <p:menuitem value="Sedes" outcome="sedes"/>
+                            <p:menuitem value="Secciones" outcome="secciones"/>
+                            <p:menuitem value="Pisos" outcome="pisos"/>
+                            <p:menuitem value="Aulas" outcome="aulas"/>
+                            <p:menuitem value="Carreras" outcome="carreras"/>
+                            <p:menuitem value="Materias" outcome="materias"/>
+                            <p:menuitem value="Titulos" outcome="titulos"/>
+                            <p:menuitem value="Turnos" outcome="turnos"/>
+                            <p:menuitem value="Dias Semana" outcome="dias_semana"/>
+                        </p:submenu>
+
+                        <p:submenu class="menu" label="Gestion Academica">
+                            <p:menuitem value="Alumnos" outcome="alumnos"/>
+                            <p:menuitem value="Mallas Curriculares" outcome="mallas"/>
+                            <p:menuitem value="Plan de cursos" outcome="planes_cursos"/>
+                            <p:menuitem value="Justificativos Alumnos" outcome="justificativos_alumnos"/>
+                        </p:submenu>
+
+                        <p:submenu class="menu" label="Gestion Documental">
+                            <p:menuitem value="Calificaciones" outcome="calificaciones"/>
+                            <p:menuitem value="Asistencias Alumnos" outcome="asistencias_alumnos"/>
+                        </p:submenu>
+
+                        <p:submenu class="menu" label="Gestion Operativa">
+                            <p:menuitem value="Confirmar Clase" outcome="clases"/>
+                            <p:menuitem value="Requisitos Docentes" outcome="requisitos_docentes"/>
+                            <p:menuitem value="Postulantes" outcome="postulantes"/>
+                            <p:menuitem value="Docentes" outcome="docentes"/>
+                            <p:menuitem value="Permisos Docentes" outcome="permisos_docentes"/>
+                            <p:menuitem value="Justificativos Docentes" outcome="justificativos_docentes"/>
+                        </p:submenu>
+                        <p:submenu class="menu" label="Informes">
+                            <p:menuitem value="Informe 1"/>
+                            <p:menuitem value="Informe 2"/>
+                            <p:menuitem value="Informe 3"/>
+                        </p:submenu>
+                    </p:panelMenu>
+                </div>
+                <div class="col-12 md:col-10 mb-2">
+                    <p:messages globalOnly="true" closable="true"/>
+                    <ui:insert name="content"/>
+                </div>
+            </div>
+        </p:card>
+    </h:body>
+</f:view>
+</html>

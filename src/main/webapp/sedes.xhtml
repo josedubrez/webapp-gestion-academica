@@ -1,0 +1,131 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/main.xhtml">
+
+    <ui:define name="content">
+
+        <div class="card crud-demo">
+            <h:form id="form">
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="header grid justify-content-center">
+                    <h1 style="margin: 0.5rem">SEDES</h1>
+                </div>
+
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{sedeController.listado}"
+                             reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
+                             paginator="true" rows="10" paginatorPosition="bottom">
+
+                    <f:facet name="header">
+                        <div class="table-header grid">
+                            <div class="col-3" style="font-weight: bold">
+                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{sedeController.resetSeleccionado}"
+                                                 update=":dialogs :dialogs:manage-content"
+                                                 oncomplete="PF('manageDialog').show()"
+                                                 styleClass="ui-button-info w-full" style="margin-right: .5rem">
+                                    <p:resetInput target=":dialogs:manage-content"/>
+                                </p:commandButton>
+                            </div>
+                            <div class="col-9">
+                                <span class="w-full filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                                    <p:inputText id="globalFilter" class="w-full" onkeyup="PF('dtListado').filter()" placeholder="Busqueda por cualquiera de los campos"/>
+                                </span>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}">
+                        <h:outputText value="#{registro.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Descripcion" sortBy="#{registro.descripcion}" filterBy="#{registro.descripcion}">
+                        <h:outputText value="#{registro.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Direccion" sortBy="#{registro.direccion}" filterBy="#{registro.direccion}">
+                        <h:outputText value="#{registro.direccion}"/>
+                    </p:column>
+
+                    <p:column headerText="Ciudad" sortBy="#{registro.ciudad.descripcion}" filterBy="#{registro.ciudad.descripcion}">
+                        <h:outputText value="#{registro.ciudad.descripcion}"/>
+                    </p:column>
+
+                    <p:column exportable="false" ariaHeaderText="Actions">
+                        <div class="grid justify-content-center">
+                            <p:commandButton icon="pi pi-pencil" update=":dialogs :dialogs:manage-content" style="margin: 0.25rem"
+                                             oncomplete="PF('manageDialog').show()"
+                                             styleClass="edit-button rounded-button ui-button-success"
+                                             title="Editar"
+                                             process="@this">
+                                <f:setPropertyActionListener value="#{registro}" target="#{sedeController.seleccionado}"/>
+                                <p:resetInput target=":dialogs:manage-content"/>
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Eliminar"
+                                             oncomplete="PF('deleteDialog').show()">
+                                <f:setPropertyActionListener value="#{registro}" target="#{sedeController.seleccionado}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
+            <h:form id="dialogs">
+                <p:dialog header="#{sedeController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
+                          responsive="true">
+                    <p:outputPanel id="manage-content" class="ui-fluid">
+                        <p:outputPanel rendered="#{not empty sedeController.seleccionado}">
+                            <div class="field">
+                                <p:outputLabel for="descripcion">Descripcion</p:outputLabel>
+                                <p:inputText id="descripcion" value="#{sedeController.seleccionado.descripcion}"/>
+                            </div>
+
+                            <div class="field">
+                                <p:outputLabel for="direccion">Direccion</p:outputLabel>
+                                <p:inputText id="direccion" value="#{sedeController.seleccionado.direccion}"/>
+                            </div>
+
+                            <div class="field">
+                                <p:outputLabel for="ciudad">Ciudad</p:outputLabel>
+                                <p:selectOneMenu id="ciudad" value="#{sedeController.seleccionado.ciudad}" required="true"
+                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
+                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
+                                    <f:selectItems value="#{sedeController.comboCiudades}" var="combo"
+                                                   itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
+                                    <f:converter binding="#{ciudadConverter}"/>
+                                </p:selectOneMenu>
+                            </div>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{sedeController.save}"
+                                         update="manage-content" process="manage-content @this"/>
+                        <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
+                                         class="ui-button-secondary" type="button"/>
+                    </f:facet>
+                </p:dialog>
+
+                <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
+                                 message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{sedeController.delete}"
+                                     process="@this" oncomplete="PF('deleteDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteDialog').hide()"/>
+                </p:confirmDialog>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>
