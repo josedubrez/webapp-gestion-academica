@@ -46,7 +46,6 @@ public class FiltroController implements Serializable {
     }
 
     public void setFiltroPlanCurso(PlanCurso filtroPlanCurso) {
-        System.out.println("FILTRO_CONTROLLER.SET_PLAN_CURSO: " + filtroPlanCurso);
         this.filtroPlanCurso = filtroPlanCurso;
     }
 

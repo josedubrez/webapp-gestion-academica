@@ -84,7 +84,7 @@
                         <p:selectBooleanCheckbox value="#{registro.aprobado}" disabled="true"/>
                     </p:column>
 
-                    <p:column exportable="false" ariaHeaderText="Actions">
+                    <p:column class="col-2" exportable="false" ariaHeaderText="Actions">
                         <div class="grid justify-content-center flex-nowrap">
                             <p:commandButton icon="pi pi-pencil" update=":dialogs :dialogs:manage-content" style="margin: 0.25rem"
                                              oncomplete="PF('manageDialog').show()"
@@ -101,19 +101,19 @@
                                 <f:setPropertyActionListener value="#{registro}" target="#{planCursoController.seleccionado}"/>
                             </p:commandButton>
                             <p:divider layout="vertical" />
-                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-book" style="margin: 0.25rem"
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-calendar-clock" style="margin: 0.25rem"
                                              process="@this"
                                              title="Ver horarios"
                                              action="#{planCursoController.irAHorarios}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
                             </p:commandButton>
-                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-book" style="margin: 0.25rem"
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-file-pdf" style="margin: 0.25rem"
                                              process="@this"
                                              title="Ver trabajos practicos"
                                              action="#{planCursoController.irATrabajosPracticos}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
                             </p:commandButton>
-                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-book" style="margin: 0.25rem"
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-clipboard" style="margin: 0.25rem"
                                              process="@this"
                                              title="Ver examenes"
                                              action="#{planCursoController.irAExamenes}">
