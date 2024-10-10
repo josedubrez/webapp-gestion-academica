@@ -11,11 +11,9 @@ public class ProducerEntityManager {
 
     @PersistenceContext(name = "tesisJpa")
     private EntityManager em;
-
     @Produces
     @RequestScoped
     private EntityManager beanEntityManager() {
         return em;
-    } //test11putito
-    //hola bebe
+    }
 }
