@@ -17,4 +17,5 @@ public class ProducerEntityManager {
     private EntityManager beanEntityManager() {
         return em;
     } //test11putito
+    //hola bebe
 }
