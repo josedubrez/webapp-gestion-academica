@@ -14,7 +14,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/ciudades.jsf</welcome-file>
+        <welcome-file>/login.jsf</welcome-file>
     </welcome-file-list>
 
     <context-param>

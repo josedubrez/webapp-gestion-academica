@@ -42,7 +42,7 @@
                         <h:outputText value="Sistema de Gestion Academica"/>
                     </div>
                     <div class="col-4 grid justify-content-end align-items-center">
-                         <span style="font-weight: bold; font-size: 1rem">Usuario: ADMIN</span>
+                         <span style="font-weight: bold; font-size: 1rem">Usuario: #{viewPermisoUsuarioController.registro.username}</span>
                          <p:button value="Cerrar Sesion" icon="pi pi-fw pi-sign-out" styleClass="ui-button-danger" style="margin-left: 1rem"/>
                     </div>
                 </div>
@@ -51,12 +51,12 @@
                 <div class="col-12 md:col-2">
                     <p:panelMenu id="menu_principal" stateful="false">
 
-                        <p:submenu class="menu" label="Seguridad">
+                        <p:submenu class="menu" label="Seguridad" rendered="#{viewPermisoUsuarioController.registro.seguridad}">
                             <p:menuitem value="Roles" outcome="roles"/>
                             <p:menuitem value="Usuarios" outcome="usuarios"/>
                         </p:submenu>
 
-                        <p:submenu class="menu" label="Referenciales">
+                        <p:submenu class="menu" label="Referenciales" rendered="#{viewPermisoUsuarioController.registro.referencial}">
                             <p:menuitem value="Ciudades" outcome="ciudades"/>
                             <p:menuitem value="Sedes" outcome="sedes"/>
                             <p:menuitem value="Secciones" outcome="secciones"/>
@@ -70,14 +70,14 @@
                             <p:menuitem value="Feriados" outcome="feriados"/>
                         </p:submenu>
 
-                        <p:submenu class="menu" label="Gestion Academica">
+                        <p:submenu class="menu" label="Gestion Academica" rendered="#{viewPermisoUsuarioController.registro.academico}">
                             <p:menuitem value="Alumnos" outcome="alumnos"/>
                             <p:menuitem value="Mallas Curriculares" outcome="mallas"/>
                             <p:menuitem value="Plan de cursos" outcome="planes_cursos"/>
                             <p:menuitem value="Inscripción" outcome="inscripciones"/>
                         </p:submenu>
 
-                        <p:submenu class="menu" label="Gestion Documental">
+                        <p:submenu class="menu" label="Gestion Documental" rendered="#{viewPermisoUsuarioController.registro.documental}">
                             <p:menuitem value="Asistencias Alumnos" outcome="asistencias_alumnos"/>
                             <p:menuitem value="Justificativos Alumnos" outcome="justificativos_alumnos"/>
                             <p:menuitem value="Sanciones" outcome="justificativos_alumnos"/>
@@ -85,7 +85,7 @@
                             <p:menuitem value="Calificaciones" outcome="calificaciones"/>
                         </p:submenu>
 
-                        <p:submenu class="menu" label="Gestion Operativa">
+                        <p:submenu class="menu" label="Gestion Operativa" rendered="#{viewPermisoUsuarioController.registro.operativo}">
                             <p:menuitem value="Requisitos Docentes" outcome="requisitos_docentes"/>
                             <p:menuitem value="Docentes" outcome="docentes"/>
                             <p:menuitem value="Postulantes" outcome="postulantes"/>
