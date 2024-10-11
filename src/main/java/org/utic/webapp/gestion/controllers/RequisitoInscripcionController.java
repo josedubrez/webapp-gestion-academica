@@ -19,7 +19,6 @@ public class RequisitoInscripcionController extends AbstractCrudController<Requi
         RequisitoInscripcionService ris = (RequisitoInscripcionService) super.servicio;
         this.listado = ris.getAllByMalla(filtrador.getFiltroMalla());
         super.resetSeleccionado();
-        System.out.println("REQUISITO_INSCRIPCION_CONTROLLER.INIT: " + this + " " + filtrador.getFiltroMalla());
     }
 
     public void resetSeleccionado() {

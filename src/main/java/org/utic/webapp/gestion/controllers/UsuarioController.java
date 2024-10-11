@@ -11,4 +11,8 @@ public class UsuarioController extends AbstractCrudController<Usuario>{
     protected Usuario createNewInstance() {
         return new Usuario();
     }
+
+    public String irARolesUsuarios() {
+        return "roles_usuarios?faces-redirect=true";
+    }
 }
