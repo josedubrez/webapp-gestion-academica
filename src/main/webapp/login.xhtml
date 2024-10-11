@@ -18,16 +18,35 @@
             .field {
                 min-width: 400px;
             }
+            .ui-card-body {
+                min-height: 100vh !important;
+                margin:0;
+                padding: 0 !important;
+            }
+            .ui-card-content {
+                min-height: 100vh !important;
+                margin: 0;
+                padding: 0 !important;
+            }
+            .main-section {
+                background: var(--bluegray-900);
+                border: 0.25rem solid white;
+                padding: 2rem;
+                border-radius: 1rem;
+            }
         </style>
 
     </h:head>
 
     <h:body style="margin: 0">
         <p:card class="min-h-screen" style="border-radius: 0">
-            <div class="grid justify-content-center">
-                <div class="col-12 md:col-3 mb-2">
+            <div class="grid justify-content-center align-items-center" style="min-height: 100vh !important">
+                <div class="main-section col-12 md:col-4">
                     <h:form id="form">
                         <p:outputPanel id="manage-content" class="ui-fluid">
+                            <div class="field grid justify-content-center">
+                                <img src="resources/img/logo.png" width="160px" height="120px" alt="logo"/>
+                            </div>
                             <div class="field">
                                 <p:outputLabel for="username">Username</p:outputLabel>
                                 <p:inputText id="username" value="#{viewPermisoUsuarioController.nuevo.username}"
