@@ -10,6 +10,7 @@ public interface InscripcionMallaService extends CrudService<InscripcionMalla>{
     List<Malla> getMallasAll();
     List<Sede> getSedesAll();
     List<Turno> getTurnosAll();
+    List<Alumno> getAlumnoAll();
 
     List<InscripcionMalla> getAllByAlumno(Alumno alumno);
 }

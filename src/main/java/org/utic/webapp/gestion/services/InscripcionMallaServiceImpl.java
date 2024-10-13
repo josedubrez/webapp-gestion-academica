@@ -3,10 +3,7 @@ package org.utic.webapp.gestion.services;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import org.utic.webapp.gestion.entities.*;
-import org.utic.webapp.gestion.repositories.InscripcionMallaRepository;
-import org.utic.webapp.gestion.repositories.MallaRepository;
-import org.utic.webapp.gestion.repositories.SedeRepository;
-import org.utic.webapp.gestion.repositories.TurnoRepository;
+import org.utic.webapp.gestion.repositories.*;
 import org.utic.webapp.gestion.utils.Mensaje;
 
 import java.util.List;
@@ -26,6 +23,9 @@ public class InscripcionMallaServiceImpl implements InscripcionMallaService{
     @Inject
     TurnoRepository repoTurno;
 
+    @Inject
+    AlumnoRepository repoAlumno;
+
     @Override
     public List<Malla> getMallasAll() {
         return repoMalla.getAll();
@@ -39,6 +39,10 @@ public class InscripcionMallaServiceImpl implements InscripcionMallaService{
     @Override
     public List<Turno> getTurnosAll() {
         return repoTurno.getAll();
+    }
+
+    @Override
+    public List<Alumno> getAlumnoAll() { return repoAlumno.getAll();
     }
 
     @Override

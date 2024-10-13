@@ -43,6 +43,10 @@
                         <h:outputText value="#{registro.id}"/>
                     </p:column>
 
+                    <p:column headerText="Alumno" sortBy="#{registro.alumno.nombre}" filterBy="#{registro.alumno.nombre}">
+                        <h:outputText value="#{registro.alumno.nombre} #{registro.alumno.apellido}"/>
+                    </p:column>
+
                     <p:column headerText="Fecha" sortBy="#{registro.fecha}" filterBy="#{registro.fecha}">
                         <h:outputText value="#{registro.fecha}">
                             <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
@@ -92,6 +96,17 @@
                           responsive="true">
                     <p:outputPanel id="manage-content" class="ui-fluid">
                         <p:outputPanel rendered="#{not empty inscripcionController.seleccionado}">
+                            <div class="field">
+                                <p:outputLabel for="alumno">Alumno</p:outputLabel>
+                                <p:selectOneMenu id="alumno" value="#{inscripcionController.seleccionado.alumno}" required="true"
+                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
+                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
+                                    <f:selectItems value="#{inscripcionController.comboAlumnos}" var="combo"
+                                                   itemLabel="#{combo.nombre} #{combo.apellido}" itemValue="#{combo}"/>
+                                    <f:converter binding="#{alumnoConverter}"/>
+                                </p:selectOneMenu>
+                            </div>
+
                             <div class="field">
                                 <h:outputLabel for="fecha" value="Fecha" />
                                 <p:datePicker pattern="yyyy-MM-dd" id="fecha" value="#{inscripcionController.seleccionado.fecha}"

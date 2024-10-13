@@ -3,10 +3,8 @@ package org.utic.webapp.gestion.controllers;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
-import org.utic.webapp.gestion.entities.InscripcionMalla;
-import org.utic.webapp.gestion.entities.Malla;
-import org.utic.webapp.gestion.entities.Sede;
-import org.utic.webapp.gestion.entities.Turno;
+import org.utic.webapp.gestion.entities.Alumno;
+import org.utic.webapp.gestion.entities.*;
 import org.utic.webapp.gestion.services.InscripcionMallaService;
 
 import java.util.List;
@@ -16,6 +14,7 @@ public class inscripcionController extends  AbstractCrudController<InscripcionMa
     private List<Malla> comboMallas;
     private List<Sede> comboSedes;
     private List<Turno> comboTurnos;
+    private List<Alumno> comboAlumnos;
 
     @Override
     protected InscripcionMalla createNewInstance() {
@@ -30,6 +29,7 @@ public class inscripcionController extends  AbstractCrudController<InscripcionMa
         this.comboMallas =  ims.getMallasAll();
         this.comboSedes = ims.getSedesAll();
         this.comboTurnos = ims.getTurnosAll();
+        this.comboAlumnos = ims.getAlumnoAll();
     }
 
     public void resetSeleccionado() {
@@ -46,6 +46,9 @@ public class inscripcionController extends  AbstractCrudController<InscripcionMa
 
     public List<Turno> getComboTurnos() {
         return comboTurnos;
+    }
+    public List<Alumno> getComboAlumnos() {
+        return comboAlumnos;
     }
 
     public String volverAAlumno() {
