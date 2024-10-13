@@ -94,6 +94,9 @@
                             <p:menuitem value="Permisos Docentes" outcome="permisos_docentes"/>
                             <p:menuitem value="Confirmar Clase" outcome="clases"/>
                         </p:submenu>
+                        <p:submenu class="menu" label="Gestion Docente" rendered="#{viewPermisoUsuarioController.registro.esDocente}">
+                            <p:menuitem value="Mis materias" outcome="mis_planes_cursos"/>
+                        </p:submenu>
                         <p:submenu class="menu" label="Informes">
                             <p:menuitem value="Informe 1"/>
                             <p:menuitem value="Informe 2"/>

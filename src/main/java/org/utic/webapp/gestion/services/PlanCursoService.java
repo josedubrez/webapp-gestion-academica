@@ -11,4 +11,5 @@ public interface PlanCursoService extends CrudService<PlanCurso>{
     List<Turno> getTurnosAll();
     List<Docente> getDocentesAll();
     List<MallaDet> getMallasDetAll();
+    List<PlanCurso> getAllByDocente(Docente docente);
 }

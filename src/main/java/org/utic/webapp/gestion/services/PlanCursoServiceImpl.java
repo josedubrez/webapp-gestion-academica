@@ -46,6 +46,11 @@ public class PlanCursoServiceImpl implements PlanCursoService{
     }
 
     @Override
+    public List<PlanCurso> getAllByDocente(Docente docente) {
+        return repoPlanCurso.getAllByDocente(docente);
+    }
+
+    @Override
     public List<PlanCurso> getAll() {
         return repoPlanCurso.getAll();
     }

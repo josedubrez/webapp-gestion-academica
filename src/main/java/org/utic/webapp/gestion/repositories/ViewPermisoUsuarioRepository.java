@@ -8,7 +8,8 @@ import org.utic.webapp.gestion.utils.Cripto;
 public class ViewPermisoUsuarioRepository extends AbstractViewRepository<ViewPermisoUsuario>{
     @Override
     protected String select() {
-        return "SELECT r FROM ViewPermisoUsuario r";
+        return "SELECT r FROM ViewPermisoUsuario r "+
+                "LEFT OUTER JOIN FETCH r.docente ";
     }
 
     public ViewPermisoUsuario getByUsernameAndPassword(String username, String password){

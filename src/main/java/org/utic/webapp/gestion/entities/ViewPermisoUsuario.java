@@ -15,8 +15,11 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
     private Boolean academico;
     private Boolean documental;
     private Boolean operativo;
-    private Boolean docente;
     private Boolean conectado;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_docente")
+    private Docente docente;
 
     public Long getId() {
         return id;
@@ -31,7 +34,6 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
     }
 
     public void setUsername(String username) {
-        System.out.println("SET_USERNAME: " + username);
         this.username = username;
     }
 
@@ -40,7 +42,6 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
     }
 
     public void setPassword(String password) {
-        System.out.println("SET_PASSWORD: " + password);
         this.password = password;
     }
 
@@ -84,19 +85,23 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
         this.operativo = operativo;
     }
 
-    public Boolean getDocente() {
-        return docente;
-    }
-
-    public void setDocente(Boolean docente) {
-        this.docente = docente;
-    }
-
     public Boolean getConectado() {
         return conectado;
     }
 
     public void setConectado(Boolean conectado) {
         this.conectado = conectado;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
+
+    public Boolean getEsDocente() {
+        return (docente != null);
     }
 }
