@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/main.xhtml">
+
+    <ui:define name="content">
+
+        <div class="card crud-demo">
+            <h:form id="form">
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="header grid justify-content-center">
+                    <h1 style="margin: 0.5rem">CONFIRMAR CLASE</h1>
+                </div>
+
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="reg" value="#{viewConfirmarClaseController.listado}"
+                             reflow="true" styleClass="table" rowKey="#{reg.id}" globalFilterOnly="#{true}"
+                             paginator="true" rows="10" paginatorPosition="bottom">
+
+                    <p:column headerText="ID" sortBy="#{reg.id}" filterBy="#{reg.id}" rendered="false">
+                        <h:outputText value="#{reg.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Materia" sortBy="#{reg.planCurso.mallaDet.materia.descripcion}" filterBy="#{reg.planCurso.mallaDet.materia.descripcion}">
+                        <h:outputText value="#{reg.planCurso.mallaDet.materia.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Carrera" sortBy="#{reg.planCurso.mallaDet.malla.carrera.descripcion}" filterBy="#{reg.planCurso.mallaDet.malla.carrera.descripcion}">
+                        <h:outputText value="#{reg.planCurso.mallaDet.malla.carrera.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Malla" sortBy="#{reg.planCurso.mallaDet.malla.anio}" filterBy="#{reg.planCurso.mallaDet.malla.anio}">
+                        <h:outputText value="#{reg.planCurso.mallaDet.malla.anio}"/>
+                    </p:column>
+
+                    <p:column headerText="Semestre" sortBy="#{reg.planCurso.mallaDet.nroSemestre}" filterBy="#{reg.planCurso.mallaDet.nroSemestre}">
+                        <h:outputText value="#{reg.planCurso.mallaDet.nroSemestre}"/>
+                    </p:column>
+
+                    <p:column headerText="Sede" sortBy="#{reg.planCurso.sede.descripcion}" filterBy="#{reg.planCurso.sede.descripcion}">
+                        <h:outputText value="#{reg.planCurso.sede.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Turno" sortBy="#{reg.planCurso.turno.descripcion}" filterBy="#{reg.planCurso.turno.descripcion}">
+                        <h:outputText value="#{reg.planCurso.turno.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Aula" sortBy="#{reg.planCursoHorario.aula.numero}" filterBy="#{reg.planCursoHorario.aula.numero}">
+                        <h:outputText value="#{reg.planCursoHorario.aula.numero}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha" sortBy="#{reg.fecha}" filterBy="#{reg.fecha}">
+                        <h:outputText value="#{reg.fecha}">
+                            <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Horario Desde" sortBy="#{reg.planCursoHorario.horarioDesde}" filterBy="#{reg.planCursoHorario.horarioDesde}">
+                        <h:outputText value="#{reg.planCursoHorario.horarioDesde}">
+                            <f:convertDateTime type="localTime" pattern="HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Horario Hasta" sortBy="#{reg.planCursoHorario.horarioHasta}" filterBy="#{reg.planCursoHorario.horarioHasta}">
+                        <h:outputText value="#{reg.planCursoHorario.horarioHasta}">
+                            <f:convertDateTime type="localTime" pattern="HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column exportable="false" ariaHeaderText="Actions">
+                        <div class="grid justify-content-center flex-nowrap">
+                            <p:commandButton class="ui-button-success rounded-button" icon="pi pi-check-circle" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Confirmar"
+                                             oncomplete="PF('deleteDialog').show()">
+                                <f:setPropertyActionListener value="#{reg}" target="#{viewConfirmarClaseController.registro}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <h:form id="dialogs">
+                <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
+                                 message="Seguro que desea confirmar la clase?" header="Confirmacion" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{viewConfirmarClaseController.insertClase}"
+                                     process="@this" oncomplete="PF('deleteDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteDialog').hide()"/>
+                </p:confirmDialog>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

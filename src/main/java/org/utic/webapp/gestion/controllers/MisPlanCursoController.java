@@ -23,6 +23,5 @@ public class MisPlanCursoController extends AbstractCrudController<PlanCurso>{
     public void init() {
         PlanCursoService pcs = (PlanCursoService) super.servicio;
         this.listado = pcs.getAllByDocente(vUsuario.getRegistro().getDocente());
-        super.resetSeleccionado();
     }
 }

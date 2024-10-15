@@ -23,7 +23,7 @@ public abstract class AbstractCrudController<T extends EntityWithId> implements 
     protected CrudService<T> servicio;
 
     @Inject
-    FiltroController filtrador;
+    protected FiltroController filtrador;
 
     @PostConstruct
     public void init() {

@@ -46,14 +46,14 @@
                         <h:outputText value="#{registro.descripcion}"/>
                     </p:column>
 
-                    <p:column headerText="Sede" sortBy="#{registro.sede.descripcion}" filterBy="#{registro.sede.descripcion}">
-                        <h:outputText value="#{registro.sede.descripcion}"/>
-                    </p:column>
-
                     <p:column headerText="Fecha" sortBy="#{registro.fecha}" filterBy="#{registro.fecha}">
                         <h:outputText value="#{registro.fecha}">
                             <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
                         </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Sede" sortBy="#{registro.sede.descripcion}" filterBy="#{registro.sede.descripcion}">
+                        <h:outputText value="#{registro.sede.descripcion}"/>
                     </p:column>
 
                     <p:column exportable="false" ariaHeaderText="Actions">
@@ -89,17 +89,6 @@
                             </div>
 
                             <div class="field">
-                                <p:outputLabel for="sede">Sede</p:outputLabel>
-                                <p:selectOneMenu id="sede" value="#{feriadoController.seleccionado.sede}" required="true"
-                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
-                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItems value="#{feriadoController.comboSedes}" var="combo"
-                                                   itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
-                                    <f:converter binding="#{sedeConverter}"/>
-                                </p:selectOneMenu>
-                            </div>
-
-                            <div class="field">
                                 <h:outputLabel for="fecha" value="Fecha" />
                                 <p:datePicker pattern="yyyy-MM-dd" id="fecha" value="#{feriadoController.seleccionado.fecha}"
                                               required="true"
@@ -107,6 +96,17 @@
                                     <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
                                     <f:passThroughAttribute name="type" value="date"/>
                                 </p:datePicker>
+                            </div>
+
+                            <div class="field">
+                                <p:outputLabel for="sede">Sede</p:outputLabel>
+                                <p:selectOneMenu id="sede" value="#{feriadoController.seleccionado.sede}"
+                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
+                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
+                                    <f:selectItems value="#{feriadoController.comboSedes}" var="combo"
+                                                   itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
+                                    <f:converter binding="#{sedeConverter}"/>
+                                </p:selectOneMenu>
                             </div>
 
                         </p:outputPanel>

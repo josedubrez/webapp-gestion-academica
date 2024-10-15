@@ -15,7 +15,7 @@
                     <h1 style="margin: 0.5rem">MIS MATERIAS</h1>
                 </div>
 
-                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{planCursoController.listado}"
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{misPlanCursoController.listado}"
                              reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
                              paginator="true" rows="10" paginatorPosition="bottom">
                     <f:facet name="header">
@@ -28,7 +28,7 @@
                         </div>
                     </f:facet>
 
-                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}">
+                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}" rendered="false">
                         <h:outputText value="#{registro.id}"/>
                     </p:column>
 
@@ -81,122 +81,12 @@
                             <p:commandButton class="ui-button-info rounded-button" icon="pi pi-calendar-clock" style="margin: 0.25rem"
                                              process="@this"
                                              title="Ver horarios"
-                                             action="#{planCursoController.irAHorarios}">
+                                             action="#{misPlanCursoController.irAHorarios}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
                             </p:commandButton>
                         </div>
                     </p:column>
                 </p:dataTable>
-            </h:form>
-
-            <h:form id="dialogs">
-                <p:dialog header="#{planCursoController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
-                          responsive="true">
-                    <p:outputPanel id="manage-content" class="ui-fluid">
-                        <p:outputPanel rendered="#{not empty planCursoController.seleccionado}">
-                            <div class="field">
-                                <p:outputLabel for="malla_det">Materia</p:outputLabel>
-                                <p:selectOneMenu id="malla_det" value="#{planCursoController.seleccionado.mallaDet}" required="true"
-                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
-                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItems value="#{planCursoController.comboMallasDet}" var="combo"
-                                                   itemLabel="#{combo.materia.descripcion} - #{combo.malla.descripcion}" itemValue="#{combo}"/>
-                                    <f:converter binding="#{mallaDetConverter}"/>
-                                </p:selectOneMenu>
-                            </div>
-                            <div class="field">
-                                <p:outputLabel for="sede">Sede</p:outputLabel>
-                                <p:selectOneMenu id="sede" value="#{planCursoController.seleccionado.sede}" required="true"
-                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
-                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItems value="#{planCursoController.comboSedes}" var="combo"
-                                                   itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
-                                    <f:converter binding="#{sedeConverter}"/>
-                                </p:selectOneMenu>
-                            </div>
-                            <div class="field">
-                                <p:outputLabel for="turno">Turno</p:outputLabel>
-                                <p:selectOneMenu id="turno" value="#{planCursoController.seleccionado.turno}" required="true"
-                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
-                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItems value="#{planCursoController.comboTurnos}" var="combo"
-                                                   itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
-                                    <f:converter binding="#{turnoConverter}"/>
-                                </p:selectOneMenu>
-                            </div>
-                            <div class="field">
-                                <p:outputLabel for="docente">Docente</p:outputLabel>
-                                <p:selectOneMenu id="docente" value="#{planCursoController.seleccionado.docente}" required="true"
-                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
-                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItems value="#{planCursoController.comboDocentes}" var="combo"
-                                                   itemLabel="#{combo.nombre} #{combo.apellido}" itemValue="#{combo}"/>
-                                    <f:converter binding="#{docenteConverter}"/>
-                                </p:selectOneMenu>
-                            </div>
-                            <div class="field">
-                                <h:outputLabel for="fecha_inicio" value="Fecha Primera Clase" />
-                                <p:datePicker pattern="yyyy-MM-dd" id="fecha_inicio" value="#{planCursoController.seleccionado.fechaInicio}"
-                                              required="true"
-                                              converterMessage="Indique la fecha con yyyy-MM-dd" >
-                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
-                                    <f:passThroughAttribute name="type" value="date"/>
-                                </p:datePicker>
-                            </div>
-                            <div class="field">
-                                <h:outputLabel for="fecha_exa_parcial" value="Fecha Examen Parcial" />
-                                <p:datePicker pattern="yyyy-MM-dd" id="fecha_exa_parcial" value="#{planCursoController.seleccionado.fechaExaParcial}"
-                                              required="true"
-                                              converterMessage="Indique la fecha con yyyy-MM-dd" >
-                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
-                                    <f:passThroughAttribute name="type" value="date"/>
-                                </p:datePicker>
-                            </div>
-                            <div class="field">
-                                <h:outputLabel for="fecha_fin" value="Fecha Ultima Clase" />
-                                <p:datePicker pattern="yyyy-MM-dd" id="fecha_fin" value="#{planCursoController.seleccionado.fechaFin}"
-                                              required="true"
-                                              converterMessage="Indique la fecha con yyyy-MM-dd" >
-                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
-                                    <f:passThroughAttribute name="type" value="date"/>
-                                </p:datePicker>
-                            </div>
-                            <div class="field">
-                                <h:outputLabel for="fecha_exa_final" value="Fecha Examen Final" />
-                                <p:datePicker pattern="yyyy-MM-dd" id="fecha_exa_final" value="#{planCursoController.seleccionado.fechaExaFinal}"
-                                              required="true"
-                                              converterMessage="Indique la fecha con yyyy-MM-dd" >
-                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
-                                    <f:passThroughAttribute name="type" value="date"/>
-                                </p:datePicker>
-                            </div>
-                            <div class="field">
-                                <p:selectBooleanCheckbox id="aprobado" value="#{planCursoController.seleccionado.aprobado}" itemLabel="Aprobado"/>
-                            </div>
-                        </p:outputPanel>
-                    </p:outputPanel>
-
-                    <f:facet name="footer">
-                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{planCursoController.save}"
-                                         update="manage-content" process="manage-content @this"/>
-                        <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
-                                         class="ui-button-secondary" type="button"/>
-                    </f:facet>
-                </p:dialog>
-
-                <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
-                                 message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
-                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{planCursoController.delete}"
-                                     process="@this" oncomplete="PF('deleteDialog').hide()"/>
-                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                     onclick="PF('deleteDialog').hide()"/>
-                </p:confirmDialog>
-
-                <p:confirmDialog global="true" showEffect="fade" width="300">
-                    <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                    <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
-                                     icon="pi pi-times"/>
-                </p:confirmDialog>
             </h:form>
         </div>
 

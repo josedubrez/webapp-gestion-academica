@@ -1,11 +1,13 @@
 package org.utic.webapp.gestion.entities;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "planes_cursos_horarios")
-public class PlanCursoHorario extends AbstractEntity<PlanCursoHorario>{
+@Table(name = "clases")
+public class Clase extends AbstractEntity<Clase>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,18 +17,22 @@ public class PlanCursoHorario extends AbstractEntity<PlanCursoHorario>{
     private PlanCurso planCurso;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_dia_semana")
-    private DiaSemana diaSemana;
+    @JoinColumn(name="id_docente")
+    private Docente docente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_aula")
     private Aula aula;
+
+    private LocalDate fecha;
 
     @Column(name = "horario_desde")
     private LocalTime horarioDesde;
 
     @Column(name = "horario_hasta")
     private LocalTime horarioHasta;
+
+    private String observacion;
 
     @Override
     public Long getId() {
@@ -45,12 +51,12 @@ public class PlanCursoHorario extends AbstractEntity<PlanCursoHorario>{
         this.planCurso = planCurso;
     }
 
-    public DiaSemana getDiaSemana() {
-        return diaSemana;
+    public Docente getDocente() {
+        return docente;
     }
 
-    public void setDiaSemana(DiaSemana diaSemana) {
-        this.diaSemana = diaSemana;
+    public void setDocente(Docente docente) {
+        this.docente = docente;
     }
 
     public Aula getAula() {
@@ -59,6 +65,14 @@ public class PlanCursoHorario extends AbstractEntity<PlanCursoHorario>{
 
     public void setAula(Aula aula) {
         this.aula = aula;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
     public LocalTime getHorarioDesde() {
@@ -75,5 +89,13 @@ public class PlanCursoHorario extends AbstractEntity<PlanCursoHorario>{
 
     public void setHorarioHasta(LocalTime horarioHasta) {
         this.horarioHasta = horarioHasta;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 }

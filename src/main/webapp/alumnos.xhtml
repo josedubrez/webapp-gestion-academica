@@ -115,6 +115,7 @@
                                 <h:outputLabel for="fechaNacimiento" value="Fecha Nacimiento" />
                                 <p:datePicker pattern="yyyy-MM-dd" id="fechaNacimiento" value="#{alumnoController.seleccionado.fechaNacimiento}"
                                               required="true"
+                                              monthNavigator="true" yearNavigator="true" yearRange="1950:2050"
                                               converterMessage="Indique la fecha con yyyy-MM-dd" >
                                     <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
                                     <f:passThroughAttribute name="type" value="date"/>

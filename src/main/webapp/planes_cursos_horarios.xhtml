@@ -60,12 +60,16 @@
                         <h:outputText value="#{registro.aula.numero}"/>
                     </p:column>
 
-                    <p:column headerText="Horario Inicio" sortBy="#{registro.horaDesde}" filterBy="#{registro.horaDesde}">
-                        <h:outputText value="#{registro.horaDesde}"/>
+                    <p:column headerText="Horario Desde" sortBy="#{registro.horarioDesde}" filterBy="#{registro.horarioDesde}">
+                        <h:outputText value="#{registro.horarioDesde}">
+                            <f:convertDateTime type="localTime" pattern="HH:mm"/>
+                        </h:outputText>
                     </p:column>
 
-                    <p:column headerText="Horario Final" sortBy="#{registro.horaHasta}" filterBy="#{registro.horaHasta}">
-                        <h:outputText value="#{registro.horaHasta}"/>
+                    <p:column headerText="Horario Hasta" sortBy="#{registro.horarioHasta}" filterBy="#{registro.horarioHasta}">
+                        <h:outputText value="#{registro.horarioHasta}">
+                            <f:convertDateTime type="localTime" pattern="HH:mm"/>
+                        </h:outputText>
                     </p:column>
 
                     <p:column exportable="false" ariaHeaderText="Actions">
@@ -119,13 +123,13 @@
                             </div>
 
                             <div class="field">
-                                <p:outputLabel for="hora_desde">Horario Desde</p:outputLabel>
-                                <p:inputText id="hora_desde" value="#{planCursoHorarioController.seleccionado.horaDesde}"/>
+                                <p:outputLabel for="horario_desde">Horario Desde</p:outputLabel>
+                                <p:datePicker id="horario_desde" value="#{planCursoHorarioController.seleccionado.horarioDesde}" timeOnly="true" pattern="HH:mm" />
                             </div>
 
                             <div class="field">
-                                <p:outputLabel for="hora_hasta">Horario Hasta</p:outputLabel>
-                                <p:inputText id="hora_hasta" value="#{planCursoHorarioController.seleccionado.horaHasta}"/>
+                                <p:outputLabel for="horario_hasta">Horario Hasta</p:outputLabel>
+                                <p:datePicker id="horario_hasta" value="#{planCursoHorarioController.seleccionado.horarioHasta}" timeOnly="true" pattern="HH:mm" />
                             </div>
 
                         </p:outputPanel>
