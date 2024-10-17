@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/main.xhtml">
+
+    <ui:define name="content">
+
+        <div class="card crud-demo">
+            <h:form id="form">
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="header grid justify-content-center">
+                    <h1 style="margin: 0.5rem">ASISTENCIAS DEL DIA</h1>
+                </div>
+
+                <div class="header grid justify-content-center">
+                    <h2 style="margin: 0.5rem">#{misAsistenciaAlumnoController.seleccionado.clase}</h2>
+                </div>
+
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{misAsistenciaAlumnoController.listado}"
+                             reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
+                             paginator="true" rows="10" paginatorPosition="bottom">
+                    <f:facet name="header">
+                        <div class="table-header grid justify-content-center">
+                            <div class="col-3" style="font-weight: bold">
+                                <p:commandButton class="col-3" value="Guardar Cambios"
+                                                 actionListener="#{misAsistenciaAlumnoController.guardarCambios}"
+                                                 styleClass="ui-button-info w-full" style="margin-bottom: 2rem"
+                                                 disabled="#{empty misAsistenciaAlumnoController.listado}"
+                                />
+                            </div>
+                        </div>
+                        <div class="table-header grid">
+                            <div class="col-12">
+                                <span class="w-full filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                                    <p:inputText id="globalFilter" class="w-full" onkeyup="PF('dtListado').filter()" placeholder="Busqueda por cualquiera de los campos"/>
+                                </span>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}" rendered="false">
+                        <h:outputText value="#{registro.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Orden">
+                        <h:outputText value="#{fila + 1}" />
+                    </p:column>
+
+                    <p:column headerText="Nro. Cedula" filterBy="#{registro.alumno.nroCedula}">
+                        <h:outputText value="#{registro.alumno.nroCedula}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre y Apellido" filterBy="#{registro.alumno.apellido}, #{registro.alumno.nombre}">
+                        <h:outputText value="#{registro.alumno.apellido}, #{registro.alumno.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Presente">
+                        <p:selectBooleanCheckbox value="#{registro.presente}" disabled="false"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

@@ -9,7 +9,6 @@ public class Mensaje{
         this.realizado = realizado;
         this.titulo = titulo;
         this.detalle = detalle;
-        System.out.println("CONSTRUCTOR_MENSAJE: "+ realizado + titulo + detalle);
     }
 
     public boolean isRealizado() {

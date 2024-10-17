@@ -15,7 +15,7 @@
                     <h1 style="margin: 0.5rem">MIS MATERIAS</h1>
                 </div>
 
-                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{misPlanCursoController.listado}"
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{misPlanCursoController.listado}"
                              reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
                              paginator="true" rows="10" paginatorPosition="bottom">
                     <f:facet name="header">
@@ -30,6 +30,10 @@
 
                     <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}" rendered="false">
                         <h:outputText value="#{registro.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Orden">
+                        <h:outputText value="#{fila + 1}" />
                     </p:column>
 
                     <p:column headerText="Materia" sortBy="#{registro.mallaDet.materia.descripcion}" filterBy="#{registro.mallaDet.materia.descripcion}">

@@ -17,6 +17,7 @@ public class FiltroController implements Serializable {
     private Alumno filtroAlumno;
     private Postulante filtroPostulante;
     private Usuario filtroUsuario;
+    private Clase filtroClase;
 
     public Malla getFiltroMalla() {
         return filtroMalla;
@@ -72,5 +73,13 @@ public class FiltroController implements Serializable {
 
     public void setFiltroUsuario(Usuario filtroUsuario) {
         this.filtroUsuario = filtroUsuario;
+    }
+
+    public Clase getFiltroClase() {
+        return filtroClase;
+    }
+
+    public void setFiltroClase(Clase filtroClase) {
+        this.filtroClase = filtroClase;
     }
 }

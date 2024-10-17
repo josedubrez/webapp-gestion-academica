@@ -19,51 +19,51 @@
                              reflow="true" styleClass="table" rowKey="#{reg.id}" globalFilterOnly="#{true}"
                              paginator="true" rows="10" paginatorPosition="bottom">
 
-                    <p:column headerText="ID" sortBy="#{reg.id}" filterBy="#{reg.id}" rendered="false">
+                    <p:column headerText="ID" filterBy="#{reg.id}" rendered="false">
                         <h:outputText value="#{reg.id}"/>
                     </p:column>
 
-                    <p:column headerText="Materia" sortBy="#{reg.planCurso.mallaDet.materia.descripcion}" filterBy="#{reg.planCurso.mallaDet.materia.descripcion}">
+                    <p:column headerText="Materia" filterBy="#{reg.planCurso.mallaDet.materia.descripcion}">
                         <h:outputText value="#{reg.planCurso.mallaDet.materia.descripcion}"/>
                     </p:column>
 
-                    <p:column headerText="Carrera" sortBy="#{reg.planCurso.mallaDet.malla.carrera.descripcion}" filterBy="#{reg.planCurso.mallaDet.malla.carrera.descripcion}">
+                    <p:column headerText="Carrera" filterBy="#{reg.planCurso.mallaDet.malla.carrera.descripcion}">
                         <h:outputText value="#{reg.planCurso.mallaDet.malla.carrera.descripcion}"/>
                     </p:column>
 
-                    <p:column headerText="Malla" sortBy="#{reg.planCurso.mallaDet.malla.anio}" filterBy="#{reg.planCurso.mallaDet.malla.anio}">
+                    <p:column headerText="Malla" filterBy="#{reg.planCurso.mallaDet.malla.anio}">
                         <h:outputText value="#{reg.planCurso.mallaDet.malla.anio}"/>
                     </p:column>
 
-                    <p:column headerText="Semestre" sortBy="#{reg.planCurso.mallaDet.nroSemestre}" filterBy="#{reg.planCurso.mallaDet.nroSemestre}">
+                    <p:column headerText="Semestre" filterBy="#{reg.planCurso.mallaDet.nroSemestre}">
                         <h:outputText value="#{reg.planCurso.mallaDet.nroSemestre}"/>
                     </p:column>
 
-                    <p:column headerText="Sede" sortBy="#{reg.planCurso.sede.descripcion}" filterBy="#{reg.planCurso.sede.descripcion}">
+                    <p:column headerText="Sede" filterBy="#{reg.planCurso.sede.descripcion}">
                         <h:outputText value="#{reg.planCurso.sede.descripcion}"/>
                     </p:column>
 
-                    <p:column headerText="Turno" sortBy="#{reg.planCurso.turno.descripcion}" filterBy="#{reg.planCurso.turno.descripcion}">
+                    <p:column headerText="Turno" filterBy="#{reg.planCurso.turno.descripcion}">
                         <h:outputText value="#{reg.planCurso.turno.descripcion}"/>
                     </p:column>
 
-                    <p:column headerText="Aula" sortBy="#{reg.planCursoHorario.aula.numero}" filterBy="#{reg.planCursoHorario.aula.numero}">
+                    <p:column headerText="Aula" filterBy="#{reg.planCursoHorario.aula.numero}">
                         <h:outputText value="#{reg.planCursoHorario.aula.numero}"/>
                     </p:column>
 
-                    <p:column headerText="Fecha" sortBy="#{reg.fecha}" filterBy="#{reg.fecha}">
+                    <p:column headerText="Fecha" filterBy="#{reg.fecha}">
                         <h:outputText value="#{reg.fecha}">
                             <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
                         </h:outputText>
                     </p:column>
 
-                    <p:column headerText="Horario Desde" sortBy="#{reg.planCursoHorario.horarioDesde}" filterBy="#{reg.planCursoHorario.horarioDesde}">
+                    <p:column headerText="Horario Desde" filterBy="#{reg.planCursoHorario.horarioDesde}">
                         <h:outputText value="#{reg.planCursoHorario.horarioDesde}">
                             <f:convertDateTime type="localTime" pattern="HH:mm"/>
                         </h:outputText>
                     </p:column>
 
-                    <p:column headerText="Horario Hasta" sortBy="#{reg.planCursoHorario.horarioHasta}" filterBy="#{reg.planCursoHorario.horarioHasta}">
+                    <p:column headerText="Horario Hasta" filterBy="#{reg.planCursoHorario.horarioHasta}">
                         <h:outputText value="#{reg.planCursoHorario.horarioHasta}">
                             <f:convertDateTime type="localTime" pattern="HH:mm"/>
                         </h:outputText>

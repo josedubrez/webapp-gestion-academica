@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "clases")
@@ -97,5 +98,13 @@ public class Clase extends AbstractEntity<Clase>{
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
+        return  planCurso.getMallaDet().getMateria().getDescripcion() + " - " +
+                "Clase del " + fecha.format(formatoFecha) + " de " + horarioDesde.format(formatoHora) + " a " + horarioHasta.format(formatoHora);
     }
 }
