@@ -44,4 +44,8 @@ public class PlanCursoHorarioController extends AbstractCrudController<PlanCurso
     public String volverAPlanCurso() {
         return "planes_cursos?faces-redirect=true";
     }
+
+    public String volverAMisPlanesCursos() {
+        return "mis_planes_cursos?faces-redirect=true";
+    }
 }

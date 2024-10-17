@@ -24,4 +24,12 @@ public class MisPlanCursoController extends AbstractCrudController<PlanCurso>{
         PlanCursoService pcs = (PlanCursoService) super.servicio;
         this.listado = pcs.getAllByDocente(vUsuario.getRegistro().getDocente());
     }
+
+    public String irAMisHorarios() {
+        return "mis_planes_cursos_horarios?faces-redirect=true";
+    }
+
+    public String irAMisTrabajosPracticos() {
+        return "mis_trabajos_practicos?faces-redirect=true";
+    }
 }

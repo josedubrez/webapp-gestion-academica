@@ -14,7 +14,7 @@
                 <div class="header grid justify-content-center" style="margin: 1rem">
                     <p:commandButton value="Volver" icon="pi pi-chevron-left" style="margin-right: 2rem"
                                      process="@this"
-                                     action="#{trabajoPracticoController.volverAPlanCurso}"
+                                     action="#{trabajoPracticoController.volverAMisPlanesCursos}"
                                      styleClass="ui-button-info">
                     </p:commandButton>
                     <h1 style="margin: 0.5rem">#{filtroController.filtroPlanCurso.mallaDet.malla.descripcion}  - #{filtroController.filtroPlanCurso.mallaDet.materia.descripcion}</h1>
@@ -36,7 +36,15 @@
 
                     <f:facet name="header">
                         <div class="table-header grid">
-                            <div class="col-12">
+                            <div class="col-3" style="font-weight: bold">
+                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{trabajoPracticoController.resetSeleccionado}"
+                                                 update=":dialogs :dialogs:manage-content"
+                                                 oncomplete="PF('manageDialog').show()"
+                                                 styleClass="ui-button-info w-full" style="margin-right: .5rem">
+                                    <p:resetInput target=":dialogs:manage-content"/>
+                                </p:commandButton>
+                            </div>
+                            <div class="col-9">
                                 <span class="w-full filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
                                     <p:inputText id="globalFilter" class="w-full" onkeyup="PF('dtListado').filter()" placeholder="Busqueda por cualquiera de los campos"/>
                                 </span>
@@ -55,6 +63,26 @@
                     <p:column headerText="Puntaje" sortBy="#{registro.puntaje}" filterBy="#{registro.puntaje}">
                         <h:outputText value="#{registro.puntaje}"/>
                     </p:column>
+
+                    <p:column exportable="false" ariaHeaderText="Actions">
+                        <div class="grid justify-content-center">
+                            <p:commandButton icon="pi pi-pencil" update=":dialogs :dialogs:manage-content" style="margin: 0.25rem"
+                                             oncomplete="PF('manageDialog').show()"
+                                             styleClass="edit-button rounded-button ui-button-success"
+                                             title="Editar"
+                                             process="@this">
+                                <f:setPropertyActionListener value="#{registro}" target="#{trabajoPracticoController.seleccionado}"/>
+                                <p:resetInput target=":dialogs:manage-content"/>
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Eliminar"
+                                             oncomplete="PF('deleteDialog').show()">
+                                <f:setPropertyActionListener value="#{registro}" target="#{trabajoPracticoController.seleccionado}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+
                 </p:dataTable>
             </h:form>
 
