@@ -14,7 +14,7 @@
                 <div class="header grid justify-content-center" style="margin: 1rem">
                     <p:commandButton value="Volver" icon="pi pi-chevron-left" style="margin-right: 2rem"
                                      process="@this"
-                                     action="#{examenController.volverAPlanCurso}"
+                                     action="#{examenController.volverAMisPlanesCursos}"
                                      styleClass="ui-button-info">
                     </p:commandButton>
                     <h1 style="margin: 0.5rem">#{filtroController.filtroPlanCurso.mallaDet.malla.descripcion}  - #{filtroController.filtroPlanCurso.mallaDet.materia.descripcion}</h1>
@@ -27,7 +27,7 @@
                 <p:divider />
 
                 <div class="header grid justify-content-center">
-                    <h2 style="margin: 0.5rem">MIS EXAMANES</h2>
+                    <h2 style="margin: 0.5rem">EXAMANES</h2>
                 </div>
 
                 <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{examenController.listado}"

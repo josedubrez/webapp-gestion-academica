@@ -14,7 +14,7 @@
                 <div class="header grid justify-content-center" style="margin: 1rem">
                     <p:commandButton value="Volver" icon="pi pi-chevron-left" style="margin-right: 2rem"
                                      process="@this"
-                                     action="#{examenController.volverAPlanCurso}"
+                                     action="#{distribucionEscalaController.volverAPlanCurso}"
                                      styleClass="ui-button-info">
                     </p:commandButton>
                     <h1 style="margin: 0.5rem">#{filtroController.filtroPlanCurso.mallaDet.malla.descripcion}  - #{filtroController.filtroPlanCurso.mallaDet.materia.descripcion}</h1>
@@ -27,17 +27,17 @@
                 <p:divider />
 
                 <div class="header grid justify-content-center">
-                    <h2 style="margin: 0.5rem">EXAMANES</h2>
+                    <h2 style="margin: 0.5rem">DISTRIBUCION PUNTAJES</h2>
                 </div>
 
-                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{examenController.listado}"
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{distribucionEscalaController.listado}"
                              reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
                              paginator="true" rows="8" paginatorPosition="bottom">
 
                     <f:facet name="header">
                         <div class="table-header grid">
                             <div class="col-3" style="font-weight: bold">
-                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{examenController.resetSeleccionado}"
+                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{distribucionEscalaController.resetSeleccionado}"
                                                  update=":dialogs :dialogs:manage-content"
                                                  oncomplete="PF('manageDialog').show()"
                                                  styleClass="ui-button-info w-full" style="margin-right: .5rem">
@@ -60,22 +60,20 @@
                         <h:outputText value="#{fila + 1}" />
                     </p:column>
 
-                    <p:column headerText="Tipo Examen" sortBy="#{registro.tipoExamen}" filterBy="#{registro.tipoExamen}">
-                        <h:outputText value="#{registro.tipoExamenDesc}"/>
+                    <p:column headerText="Puntaje Trabajos en Clase" sortBy="#{registro.puntajeTrabajosClases}" filterBy="#{registro.puntajeTrabajosClases}">
+                        <h:outputText value="#{registro.puntajeTrabajosClases}"/>
                     </p:column>
 
-                    <p:column headerText="Forma Examen" sortBy="#{registro.formaExamen}" filterBy="#{registro.formaExamen}">
-                        <h:outputText value="#{registro.formaExamenDesc}"/>
+                    <p:column headerText="Puntaje Trabajos Practicos" sortBy="#{registro.puntajeTrabajosPracticos}" filterBy="#{registro.puntajeTrabajosPracticos}">
+                        <h:outputText value="#{registro.puntajeTrabajosPracticos}"/>
                     </p:column>
 
-                    <p:column headerText="Fecha" sortBy="#{registro.fecha}" filterBy="#{registro.fecha}">
-                        <h:outputText value="#{registro.fecha}">
-                            <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
-                        </h:outputText>
+                    <p:column headerText="Puntaje Examen Parcial" sortBy="#{registro.puntajeExamenParcial}" filterBy="#{registro.puntajeExamenParcial}">
+                        <h:outputText value="#{registro.puntajeExamenParcial}"/>
                     </p:column>
 
-                    <p:column headerText="Puntaje" sortBy="#{registro.puntaje}" filterBy="#{registro.puntaje}">
-                        <h:outputText value="#{registro.puntaje}"/>
+                    <p:column headerText="Puntaje Examen Final" sortBy="#{registro.puntajeExamenFinal}" filterBy="#{registro.puntajeExamenFinal}">
+                        <h:outputText value="#{registro.puntajeExamenFinal}"/>
                     </p:column>
 
                     <p:column exportable="false" ariaHeaderText="Actions">
@@ -84,18 +82,16 @@
                                              oncomplete="PF('manageDialog').show()"
                                              styleClass="edit-button rounded-button ui-button-success"
                                              title="Editar"
-                                             rendered="#{registro.permisoAlterar()}"
                                              process="@this">
-                                <f:setPropertyActionListener value="#{registro}" target="#{examenController.seleccionado}"/>
+                                <f:setPropertyActionListener value="#{registro}" target="#{distribucionEscalaController.seleccionado}"/>
                                 <p:resetInput target=":dialogs:manage-content"/>
                             </p:commandButton>
                             <p:commandButton class="ui-button-danger rounded-button"
                                              icon="pi pi-trash" style="margin: 0.25rem"
                                              process="@this"
                                              title="Eliminar"
-                                             rendered="#{registro.permisoAlterar()}"
                                              oncomplete="PF('deleteDialog').show()">
-                                <f:setPropertyActionListener value="#{registro}" target="#{examenController.seleccionado}"/>
+                                <f:setPropertyActionListener value="#{registro}" target="#{distribucionEscalaController.seleccionado}"/>
                             </p:commandButton>
                         </div>
                     </p:column>
@@ -103,44 +99,36 @@
             </h:form>
 
             <h:form id="dialogs">
-                <p:dialog header="#{examenController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
+                <p:dialog header="#{distribucionEscalaController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
                           responsive="true">
                     <p:outputPanel id="manage-content" class="ui-fluid">
-                        <p:outputPanel rendered="#{not empty examenController.seleccionado}">
+                        <p:outputPanel rendered="#{not empty distribucionEscalaController.seleccionado}">
 
                             <div class="field">
-                                <p:outputLabel for="tipo_examen">Tipo Examen</p:outputLabel>
-                                <p:selectOneMenu id="tipo_examen" value="#{examenController.seleccionado.tipoExamen}">
-                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItem itemLabel="Parcial" itemValue="P"/>
-                                    <f:selectItem itemLabel="Final" itemValue="F"/>
-                                </p:selectOneMenu>
+                                <p:outputLabel for="puntaje_tc">Puntaje Trabajos en Clase</p:outputLabel>
+                                <p:inputNumber id="puntaje_tc" value="#{distribucionEscalaController.seleccionado.puntajeTrabajosClases}" required="true"/>
                             </div>
 
                             <div class="field">
-                                <p:outputLabel for="forma_examen">Forma Examen</p:outputLabel>
-                                <p:selectOneMenu id="forma_examen" value="#{examenController.seleccionado.formaExamen}">
-                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItem itemLabel="Segunda Oportunidad" itemValue="SO"/>
-                                    <f:selectItem itemLabel="Extraordinario" itemValue="EX"/>
-                                </p:selectOneMenu>
+                                <p:outputLabel for="puntaje_tp">Puntaje Trabajos Practicos</p:outputLabel>
+                                <p:inputNumber id="puntaje_tp" value="#{distribucionEscalaController.seleccionado.puntajeTrabajosPracticos}" required="true"/>
                             </div>
 
                             <div class="field">
-                                <h:outputLabel for="fecha" value="Fecha" />
-                                <p:datePicker pattern="yyyy-MM-dd" id="fecha" value="#{examenController.seleccionado.fecha}"
-                                              required="true"
-                                              converterMessage="Indique la fecha con yyyy-MM-dd" >
-                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
-                                    <f:passThroughAttribute name="type" value="date"/>
-                                </p:datePicker>
+                                <p:outputLabel for="puntaje_ep">Puntaje Examen Parcial</p:outputLabel>
+                                <p:inputNumber id="puntaje_ep" value="#{distribucionEscalaController.seleccionado.puntajeExamenParcial}" required="true"/>
+                            </div>
+
+                            <div class="field">
+                                <p:outputLabel for="puntaje_ef">Puntaje Examen Final</p:outputLabel>
+                                <p:inputNumber id="puntaje_ef" value="#{distribucionEscalaController.seleccionado.puntajeExamenFinal}" required="true"/>
                             </div>
 
                         </p:outputPanel>
                     </p:outputPanel>
 
                     <f:facet name="footer">
-                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{examenController.save}"
+                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{distribucionEscalaController.save}"
                                          update="manage-content" process="manage-content @this"/>
                         <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
                                          class="ui-button-secondary" type="button"/>
@@ -149,7 +137,7 @@
 
                 <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
                                  message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
-                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{examenController.delete}"
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{distribucionEscalaController.delete}"
                                      process="@this" oncomplete="PF('deleteDialog').hide()"/>
                     <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                                      onclick="PF('deleteDialog').hide()"/>

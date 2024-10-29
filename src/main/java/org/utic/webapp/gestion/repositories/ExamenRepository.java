@@ -14,7 +14,7 @@ public class ExamenRepository extends AbstractCrudRepository<Examen>{
     }
 
     public List<Examen> getAllByPlanCurso(PlanCurso planCurso){
-        return super.em.createQuery(select() + " WHERE r.planCurso.id = :id_plan_curso " + "ORDER BY r.id DESC", super.entityClass)
+        return super.em.createQuery(select() + " WHERE r.planCurso.id = :id_plan_curso " + "ORDER BY r.id ASC", super.entityClass)
                 .setParameter("id_plan_curso", planCurso.getId())
                 .getResultList();
     }

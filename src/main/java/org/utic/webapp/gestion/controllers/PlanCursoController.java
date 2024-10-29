@@ -59,4 +59,8 @@ public class PlanCursoController extends AbstractCrudController<PlanCurso>{
     public String irAExamenes() {
         return "examenes?faces-redirect=true";
     }
+
+    public String irADistribucionesEscalas() {
+        return "distribuciones_escalas?faces-redirect=true";
+    }
 }

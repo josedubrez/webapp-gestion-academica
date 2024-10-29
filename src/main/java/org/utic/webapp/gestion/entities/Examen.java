@@ -26,8 +26,8 @@ public class Examen extends AbstractEntity<Examen>{
     @Column(name = "forma_examen")
     private String formaExamen;
 
-    @NotNull
-    @Positive
+    //@NotNull
+    //@Positive
     private Integer puntaje;
 
     @Override
@@ -98,6 +98,10 @@ public class Examen extends AbstractEntity<Examen>{
                             "Extraordinario";
         }
         return null;
+    }
+
+    public boolean permisoAlterar(){
+        return !formaExamen.equals("PO");
     }
 
 }
