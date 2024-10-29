@@ -140,7 +140,8 @@
                                 <p:inputNumber id="cupos" value="#{mallaController.seleccionado.cupos}" required="true"/>
                             </div>
                             <div class="field">
-                                <p:selectBooleanCheckbox id="aprobado" value="#{mallaController.seleccionado.aprobado}" itemLabel="Aprobado"/>
+                                <p:selectBooleanCheckbox id="aprobado" value="#{mallaController.seleccionado.aprobado}" itemLabel="Aprobado"
+                                                        rendered="#{(mallaController.seleccionado.id > 0)}"/>
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>

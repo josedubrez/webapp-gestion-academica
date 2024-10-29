@@ -212,7 +212,8 @@
                                 </p:datePicker>
                             </div>
                             <div class="field">
-                                <p:selectBooleanCheckbox id="aprobado" value="#{planCursoController.seleccionado.aprobado}" itemLabel="Aprobado"/>
+                                <p:selectBooleanCheckbox id="aprobado" value="#{planCursoController.seleccionado.aprobado}" itemLabel="Aprobado"
+                                                         rendered="#{(planCursoController.seleccionado.id > 0)}"/>
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>
