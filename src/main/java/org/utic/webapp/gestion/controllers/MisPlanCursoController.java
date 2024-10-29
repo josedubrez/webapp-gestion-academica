@@ -32,4 +32,8 @@ public class MisPlanCursoController extends AbstractCrudController<PlanCurso>{
     public String irAMisTrabajosPracticos() {
         return "mis_trabajos_practicos?faces-redirect=true";
     }
+
+    public String irAMisExamenes(){
+        return "mis_examenes?faces-redirect=true";
+    }
 }

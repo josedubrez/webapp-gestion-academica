@@ -81,7 +81,7 @@
                     </p:column>
 
                     <p:column headerText="Aprobado">
-                        <p:selectBooleanCheckbox value="#{registro.aprobado}" disabled="true"/>
+                        <h:outputText value="#{registro.aprobado ? 'SI' : 'NO'}"/>
                     </p:column>
 
                     <p:column class="col-2" exportable="false" ariaHeaderText="Actions">

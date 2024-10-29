@@ -55,4 +55,8 @@ public class PlanCursoController extends AbstractCrudController<PlanCurso>{
     public String irATrabajosPracticos() {
         return "trabajos_practicos?faces-redirect=true";
     }
+
+    public String irAExamenes() {
+        return "examenes?faces-redirect=true";
+    }
 }

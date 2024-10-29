@@ -30,7 +30,7 @@
                     <h2 style="margin: 0.5rem">TRABAJOS PRACTICOS</h2>
                 </div>
 
-                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{trabajoPracticoController.listado}"
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{trabajoPracticoController.listado}"
                              reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
                              paginator="true" rows="8" paginatorPosition="bottom">
 
@@ -44,8 +44,12 @@
                         </div>
                     </f:facet>
 
-                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}">
+                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}" rendered="false">
                         <h:outputText value="#{registro.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Orden">
+                        <h:outputText value="#{fila + 1}" />
                     </p:column>
 
                     <p:column headerText="Titulo" sortBy="#{registro.titulo}" filterBy="#{registro.titulo}">
