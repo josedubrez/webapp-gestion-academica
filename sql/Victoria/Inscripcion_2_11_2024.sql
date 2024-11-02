@@ -32,3 +32,4 @@ $function$
 
 create trigger tr_ins_ins_inscripcion after
 insert on inscripciones_mallas for each row execute procedure f_tr_ins_inscripcion()
+---
