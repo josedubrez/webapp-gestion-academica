@@ -25,9 +25,9 @@ public class DesercionAlumno extends AbstractEntity<DesercionAlumno>{
 
     private LocalDate fecha;
 
-    @Column(name = "fecha_alta")
+  /*  @Column(name = "fecha_alta")
     private LocalDate fechaAlta;
-
+*/
 
 
     @Override
@@ -64,13 +64,13 @@ public class DesercionAlumno extends AbstractEntity<DesercionAlumno>{
         this.alumno = alumno;
     }
 
-    public LocalDate getFechaAlta() {
+    /*public LocalDate getFechaAlta() {
         return fechaAlta;
     }
 
     public void setFechaAlta(LocalDate fechaAlta) {
         this.fechaAlta = fechaAlta;
-    }
+    }*/
 
     public Malla getMalla() {
         return malla;

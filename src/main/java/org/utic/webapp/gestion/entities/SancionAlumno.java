@@ -25,8 +25,8 @@ public class SancionAlumno extends AbstractEntity<SancionAlumno>{
 
     private LocalDate fecha;
 
-    @Column(name = "fecha_alta")
-    private LocalDate fechaAlta;
+    /*@Column(name = "fecha_alta")
+    private LocalDate fechaAlta;*/
 
     @Column(name = "dir_archivo")
     private String dirArchivo;
@@ -75,13 +75,6 @@ public class SancionAlumno extends AbstractEntity<SancionAlumno>{
         this.alumno = alumno;
     }
 
-    public LocalDate getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(LocalDate fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }
 
     public Malla getMalla() {
         return malla;
