@@ -1,6 +1,8 @@
 package org.utic.webapp.gestion.repositories;
 
 import jakarta.enterprise.context.RequestScoped;
+import org.utic.webapp.gestion.entities.Alumno;
+import org.utic.webapp.gestion.entities.InscripcionMalla;
 import org.utic.webapp.gestion.entities.Malla;
 import org.utic.webapp.gestion.entities.RequisitoInscripcion;
 
@@ -11,7 +13,8 @@ public class RequisitoInscripcionRepository extends AbstractCrudRepository<Requi
     @Override
     protected String select() {
         return "SELECT r FROM RequisitoInscripcion r " +
-                "LEFT OUTER JOIN FETCH r.malla ";
+                "LEFT OUTER JOIN FETCH r.malla "+
+                "LEFT OUTER JOIN FETCH r.requisito";
     }
 
     public List<RequisitoInscripcion> getAllByMalla(Malla malla){
@@ -19,4 +22,5 @@ public class RequisitoInscripcionRepository extends AbstractCrudRepository<Requi
                 .setParameter("id_malla", malla.getId())
                 .getResultList();
     }
+
 }

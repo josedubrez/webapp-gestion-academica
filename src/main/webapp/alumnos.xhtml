@@ -89,6 +89,12 @@
                                              action="#{alumnoController.irAInscripcionesMallas}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroAlumno}"/>
                             </p:commandButton>
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-book" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Ver requisito"
+                                             action="#{alumnoController.irAInscripcionesMallas}">
+                                <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroAlumno}"/>
+                            </p:commandButton>
                         </div>
                     </p:column>
                 </p:dataTable>

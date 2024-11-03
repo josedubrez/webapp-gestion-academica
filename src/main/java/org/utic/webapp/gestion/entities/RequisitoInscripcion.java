@@ -1,7 +1,6 @@
 package org.utic.webapp.gestion.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
@@ -16,8 +15,9 @@ public class RequisitoInscripcion extends AbstractEntity<RequisitoInscripcion> {
     @JoinColumn(name="id_malla")
     private Malla malla;
 
-    @NotEmpty
-    private String descripcion;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_requisito")
+    private Requisito requisito;
 
     @Column(name = "fecha_limite")
     private LocalDate fechaLimite;
@@ -31,20 +31,12 @@ public class RequisitoInscripcion extends AbstractEntity<RequisitoInscripcion> {
         this.id = id;
     }
 
-    public Malla getMalla() {
-        return malla;
+    public Requisito getRequisito() {
+        return requisito;
     }
 
-    public void setMalla(Malla malla) {
-        this.malla = malla;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setRequisito(Requisito requisito) {
+        this.requisito = requisito;
     }
 
     public LocalDate getFechaLimite() {
@@ -53,5 +45,13 @@ public class RequisitoInscripcion extends AbstractEntity<RequisitoInscripcion> {
 
     public void setFechaLimite(LocalDate fechaLimite) {
         this.fechaLimite = fechaLimite;
+    }
+
+    public Malla getMalla() {
+        return malla;
+    }
+
+    public void setMalla(Malla malla) {
+        this.malla = malla;
     }
 }

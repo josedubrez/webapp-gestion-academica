@@ -12,7 +12,10 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
 
     private Boolean seguridad;
     private Boolean referencial;
-    private Boolean academico;
+
+    private Boolean secretaria;
+    private Boolean coordinacion;
+
     private Boolean documental;
     private Boolean operativo;
     private Boolean conectado;
@@ -61,14 +64,6 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
         this.referencial = referencial;
     }
 
-    public Boolean getAcademico() {
-        return academico;
-    }
-
-    public void setAcademico(Boolean academico) {
-        this.academico = academico;
-    }
-
     public Boolean getDocumental() {
         return documental;
     }
@@ -103,5 +98,21 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
 
     public Boolean getEsDocente() {
         return (docente != null);
+    }
+
+    public Boolean getSecretaria() {
+        return secretaria;
+    }
+
+    public void setSecretaria(Boolean secretaria) {
+        this.secretaria = secretaria;
+    }
+
+    public Boolean getCoordinacion() {
+        return coordinacion;
+    }
+
+    public void setCoordinacion(Boolean coordinacion) {
+        this.coordinacion = coordinacion;
     }
 }
