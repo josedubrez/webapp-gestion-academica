@@ -14,7 +14,7 @@
                 <div class="header grid justify-content-center" style="margin: 1rem">
                     <p:commandButton value="Volver" icon="pi pi-chevron-left" style="margin-right: 2rem"
                                      process="@this"
-                                     action="#{examenController.volverAMisPlanesCursos}"
+                                     action="#{distribucionEscalaController.volverAMisPlanCurso}"
                                      styleClass="ui-button-info">
                     </p:commandButton>
                     <h1 style="margin: 0.5rem">#{filtroController.filtroPlanCurso.mallaDet.malla.descripcion}  - #{filtroController.filtroPlanCurso.mallaDet.materia.descripcion}</h1>
@@ -27,20 +27,15 @@
                 <p:divider />
 
                 <div class="header grid justify-content-center">
-                    <h2 style="margin: 0.5rem">EXAMANES</h2>
+                    <h2 style="margin: 0.5rem">DISTRIBUCION PUNTAJES</h2>
                 </div>
 
-                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{examenController.listado}"
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{distribucionEscalaController.listado}"
                              reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
                              paginator="true" rows="8" paginatorPosition="bottom">
 
                     <f:facet name="header">
                         <div class="table-header grid">
-                            <div class="col-12">
-                                <span class="w-full filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
-                                    <p:inputText id="globalFilter" class="w-full" onkeyup="PF('dtListado').filter()" placeholder="Busqueda por cualquiera de los campos"/>
-                                </span>
-                            </div>
                         </div>
                     </f:facet>
 
@@ -52,33 +47,20 @@
                         <h:outputText value="#{fila + 1}" />
                     </p:column>
 
-                    <p:column headerText="Tipo Examen" sortBy="#{registro.tipoExamen}" filterBy="#{registro.tipoExamen}">
-                        <h:outputText value="#{registro.tipoExamenDesc}"/>
+                    <p:column headerText="Puntaje Trabajos en Clase" sortBy="#{registro.puntajeTrabajosClases}" filterBy="#{registro.puntajeTrabajosClases}">
+                        <h:outputText value="#{registro.puntajeTrabajosClases}"/>
                     </p:column>
 
-                    <p:column headerText="Forma Examen" sortBy="#{registro.formaExamen}" filterBy="#{registro.formaExamen}">
-                        <h:outputText value="#{registro.formaExamenDesc}"/>
+                    <p:column headerText="Puntaje Trabajos Practicos" sortBy="#{registro.puntajeTrabajosPracticos}" filterBy="#{registro.puntajeTrabajosPracticos}">
+                        <h:outputText value="#{registro.puntajeTrabajosPracticos}"/>
                     </p:column>
 
-                    <p:column headerText="Fecha" sortBy="#{registro.fecha}" filterBy="#{registro.fecha}">
-                        <h:outputText value="#{registro.fecha}">
-                            <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
-                        </h:outputText>
+                    <p:column headerText="Puntaje Examen Parcial" sortBy="#{registro.puntajeExamenParcial}" filterBy="#{registro.puntajeExamenParcial}">
+                        <h:outputText value="#{registro.puntajeExamenParcial}"/>
                     </p:column>
 
-                    <p:column headerText="Puntaje" sortBy="#{registro.puntaje}" filterBy="#{registro.puntaje}">
-                        <h:outputText value="#{registro.puntaje}"/>
-                    </p:column>
-
-                    <p:column exportable="false" ariaHeaderText="Actions">
-                        <div class="grid justify-content-center">
-                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-users" style="margin: 0.25rem"
-                                             process="@this"
-                                             title="Alumnos"
-                                             action="#{examenController.irAMisExamenesDet}">
-                                <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroExamen}"/>
-                            </p:commandButton>
-                        </div>
+                    <p:column headerText="Puntaje Examen Final" sortBy="#{registro.puntajeExamenFinal}" filterBy="#{registro.puntajeExamenFinal}">
+                        <h:outputText value="#{registro.puntajeExamenFinal}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

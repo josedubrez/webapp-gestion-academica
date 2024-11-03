@@ -33,4 +33,8 @@ public class ExamenController extends AbstractCrudController<Examen>{
     public String volverAMisPlanesCursos() {
         return "mis_planes_cursos?faces-redirect=true";
     }
+
+    public String irAMisExamenesDet() {
+        return "mis_examenes_det?faces-redirect=true";
+    }
 }

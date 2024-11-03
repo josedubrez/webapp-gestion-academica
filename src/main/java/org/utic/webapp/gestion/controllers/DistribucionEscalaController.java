@@ -30,7 +30,7 @@ public class DistribucionEscalaController extends AbstractCrudController<Distrib
         return "planes_cursos?faces-redirect=true";
     }
 
-    public String volverAMisPlanesCursos() {
+    public String volverAMisPlanCurso() {
         return "mis_planes_cursos?faces-redirect=true";
     }
 }
