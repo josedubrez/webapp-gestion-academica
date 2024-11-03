@@ -72,6 +72,13 @@
                                              oncomplete="PF('deleteDialog').show()">
                                 <f:setPropertyActionListener value="#{registro}" target="#{trabajoPracticoController.seleccionado}"/>
                             </p:commandButton>
+                            <p:divider layout="vertical" />
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-users" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Alumnos"
+                                             action="#{trabajoPracticoController.irAMisTrabajosPracticosDet}">
+                                <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroTrabajoPractico}"/>
+                            </p:commandButton>
                         </div>
                     </p:column>
 

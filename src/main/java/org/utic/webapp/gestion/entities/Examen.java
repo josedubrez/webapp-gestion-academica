@@ -26,8 +26,6 @@ public class Examen extends AbstractEntity<Examen>{
     @Column(name = "forma_examen")
     private String formaExamen;
 
-    //@NotNull
-    //@Positive
     private Integer puntaje;
 
     @Override

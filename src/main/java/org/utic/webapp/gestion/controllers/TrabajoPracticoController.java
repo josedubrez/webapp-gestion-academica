@@ -33,4 +33,8 @@ public class TrabajoPracticoController extends AbstractCrudController<TrabajoPra
     public String volverAMisPlanesCursos() {
         return "mis_planes_cursos?faces-redirect=true";
     }
+
+    public String irAMisTrabajosPracticosDet() {
+        return "mis_trabajos_practicos_det?faces-redirect=true";
+    }
 }
