@@ -66,7 +66,7 @@
                         <h:outputText value="#{registro.email}"/>
                     </p:column>
 
-                    <p:column exportable="false" ariaHeaderText="Actions">
+                    <p:column class="col-2" exportable="false" ariaHeaderText="Actions">
                         <div class="grid justify-content-center flex-nowrap">
                             <p:commandButton icon="pi pi-pencil" update=":dialogs :dialogs:manage-content" style="margin: 0.25rem"
                                              oncomplete="PF('manageDialog').show()"
@@ -83,16 +83,24 @@
                                 <f:setPropertyActionListener value="#{registro}" target="#{alumnoController.seleccionado}"/>
                             </p:commandButton>
                             <p:divider layout="vertical" />
-                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-book" style="margin: 0.25rem"
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-id-card" style="margin: 0.25rem"
                                              process="@this"
-                                             title="Ver inscripciones"
+                                             title="Ver requisitos"
+                                             action="#{alumnoController.irAInscripcionesRequisitos}">
+                                <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroAlumno}"/>
+                            </p:commandButton>
+
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-check-square" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Inscripciones a Mallas"
                                              action="#{alumnoController.irAInscripcionesMallas}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroAlumno}"/>
                             </p:commandButton>
-                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-book" style="margin: 0.25rem"
+
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-check-square" style="margin: 0.25rem"
                                              process="@this"
-                                             title="Ver requisito"
-                                             action="#{alumnoController.irAInscripcionesMallas}">
+                                             title="Inscripcion a Plan Curso"
+                                             action="#{alumnoController.irAInscripcionesPlanCurso}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroAlumno}"/>
                             </p:commandButton>
                         </div>

@@ -121,4 +121,15 @@ public class PlanCurso extends AbstractEntity<PlanCurso>{
     public void setMallaDet(MallaDet mallaDet) {
         this.mallaDet = mallaDet;
     }
+
+    public String getDesc() {
+        return this.mallaDet.getMateria().getDescripcion() + " - " +
+                this.mallaDet.getMalla().getCarrera().getDescripcion() + " " +
+                this.mallaDet.getMalla().getAnio().toString() + " - " +
+                this.docente.getNombre() + " " +  this.docente.getApellido()+ " - " +
+                this.sede.getDescripcion() + " - " +
+                this.turno.getDescripcion();
+    }
+
+
 }

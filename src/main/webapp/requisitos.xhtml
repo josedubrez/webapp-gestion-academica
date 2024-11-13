@@ -9,31 +9,21 @@
 
         <div class="card crud-demo">
             <h:form id="form">
+
                 <p:growl id="messages" showDetail="true"/>
 
-                <div class="header grid justify-content-center" style="margin: 1rem">
-                    <p:commandButton value="Volver" icon="pi pi-chevron-left" style="margin-right: 2rem"
-                                     process="@this"
-                                     action="#{requisitoInscripcionController.volverAMalla}"
-                                     styleClass="ui-button-info">
-                    </p:commandButton>
-                    <h1 style="margin: 0.5rem">#{filtroController.filtroMalla.descripcion}</h1>
-                </div>
-
-                <p:divider />
-
                 <div class="header grid justify-content-center">
-                    <h2 style="margin: 0.5rem">REQUISITOS PARA INSCRIPCIÓN</h2>
+                    <h1 style="margin: 0.5rem">REQUISITOS</h1>
                 </div>
 
-                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{requisitoInscripcionController.listado}"
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{requisitosController.listado}"
                              reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
-                             paginator="true" rows="8" paginatorPosition="bottom">
+                             paginator="true" rows="10" paginatorPosition="bottom">
 
                     <f:facet name="header">
                         <div class="table-header grid">
                             <div class="col-3" style="font-weight: bold">
-                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{requisitoInscripcionController.resetSeleccionado}"
+                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{requisitosController.resetSeleccionado}"
                                                  update=":dialogs :dialogs:manage-content"
                                                  oncomplete="PF('manageDialog').show()"
                                                  styleClass="ui-button-info w-full" style="margin-right: .5rem">
@@ -48,22 +38,16 @@
                         </div>
                     </f:facet>
 
-                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}" rendered="false">
+                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}">
                         <h:outputText value="#{registro.id}"/>
                     </p:column>
 
-                    <p:column headerText="ID">
-                        <h:outputText value="#{fila + 1}" />
+                    <p:column headerText="Descripcion" sortBy="#{registro.descripcion}" filterBy="#{registro.descripcion}">
+                        <h:outputText value="#{registro.descripcion}"/>
                     </p:column>
 
-                    <p:column headerText="Requisito" sortBy="#{registro.requisito.descripcion}" filterBy="#{registro.requisito.descripcion}">
-                        <h:outputText value="#{registro.requisito.descripcion}"/>
-                    </p:column>
-
-                    <p:column headerText="Fecha limite" sortBy="#{registro.fechaLimite}" filterBy="#{registro.fechaLimite}">
-                        <h:outputText value="#{registro.fechaLimite}">
-                            <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
-                        </h:outputText>
+                    <p:column headerText="Estado" sortBy="#{registro.estado}" filterBy="#{registro.estado}">
+                        <h:outputText value="#{registro.estado}"/>
                     </p:column>
 
                     <p:column exportable="false" ariaHeaderText="Actions">
@@ -73,14 +57,14 @@
                                              styleClass="edit-button rounded-button ui-button-success"
                                              title="Editar"
                                              process="@this">
-                                <f:setPropertyActionListener value="#{registro}" target="#{requisitoInscripcionController.seleccionado}"/>
+                                <f:setPropertyActionListener value="#{registro}" target="#{requisitosController.seleccionado}"/>
                                 <p:resetInput target=":dialogs:manage-content"/>
                             </p:commandButton>
                             <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" style="margin: 0.25rem"
                                              process="@this"
                                              title="Eliminar"
                                              oncomplete="PF('deleteDialog').show()">
-                                <f:setPropertyActionListener value="#{registro}" target="#{requisitoInscripcionController.seleccionado}"/>
+                                <f:setPropertyActionListener value="#{registro}" target="#{requisitosController.seleccionado}"/>
                             </p:commandButton>
                         </div>
                     </p:column>
@@ -89,35 +73,25 @@
             </h:form>
 
             <h:form id="dialogs">
-                <p:dialog header="#{requisitoInscripcionController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
+                <p:dialog header="#{requisitosController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
                           responsive="true">
                     <p:outputPanel id="manage-content" class="ui-fluid">
-                        <p:outputPanel rendered="#{not empty requisitoInscripcionController.seleccionado}">
+                        <p:outputPanel rendered="#{not empty requisitosController.seleccionado}">
                             <div class="field">
-                                <p:outputLabel for="requisito">Requisito</p:outputLabel>
-                                <p:selectOneMenu id="requisito" value="#{requisitoInscripcionController.seleccionado.requisito}" required="true"
-                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
-                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItems value="#{requisitoInscripcionController.comboRequisitos}" var="combo"
-                                                   itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
-                                    <f:converter binding="#{requisitoConverter}"/>
-                                </p:selectOneMenu>
+                                <p:outputLabel for="descripcion">Descripcion</p:outputLabel>
+                                <p:inputText id="descripcion" value="#{requisitosController.seleccionado.descripcion}"/>
                             </div>
 
                             <div class="field">
-                                <h:outputLabel for="fecha_limite" value="Fecha Limite" />
-                                <p:datePicker pattern="yyyy-MM-dd" id="fecha_limite" value="#{requisitoInscripcionController.seleccionado.fechaLimite}"
-                                              required="true"
-                                              converterMessage="Indique la fecha con yyyy-MM-dd" >
-                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
-                                    <f:passThroughAttribute name="type" value="date"/>
-                                </p:datePicker>
+                                <p:outputLabel for="estado">Estado</p:outputLabel>
+                                <p:inputText id="estado" value="#{requisitosController.seleccionado.estado}"
+                                             onkeyup="this.value = this.value.toUpperCase();"  maxlength="10"/>
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>
 
                     <f:facet name="footer">
-                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{requisitoInscripcionController.save}"
+                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{requisitosController.save}"
                                          update="manage-content" process="manage-content @this"/>
                         <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
                                          class="ui-button-secondary" type="button"/>
@@ -126,7 +100,7 @@
 
                 <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
                                  message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
-                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{requisitoInscripcionController.delete}"
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{requisitosController.delete}"
                                      process="@this" oncomplete="PF('deleteDialog').hide()"/>
                     <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                                      onclick="PF('deleteDialog').hide()"/>

@@ -10,7 +10,6 @@ import java.util.List;
 
 @Stateless
 public class CarreraServiceImpl implements CarreraService{
-
     @Inject
     CarreraRepository repoCarrera;
 

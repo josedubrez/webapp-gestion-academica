@@ -15,4 +15,12 @@ public class AlumnoController extends AbstractCrudController<Alumno>{
     public String irAInscripcionesMallas() {
         return "inscripciones_mallas?faces-redirect=true";
     }
+
+    public String irAInscripcionesRequisitos() {
+        return "req_inscripciones_alumno?faces-redirect=true";
+    }
+
+    public String irAInscripcionesPlanCurso() {
+        return "inscripciones_plan_curso?faces-redirect=true";
+    }
 }

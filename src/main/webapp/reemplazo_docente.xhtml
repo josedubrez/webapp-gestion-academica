@@ -11,29 +11,19 @@
             <h:form id="form">
                 <p:growl id="messages" showDetail="true"/>
 
-                <div class="header grid justify-content-center" style="margin: 1rem">
-                    <p:commandButton value="Volver" icon="pi pi-chevron-left" style="margin-right: 2rem"
-                                     process="@this"
-                                     action="#{requisitoInscripcionController.volverAMalla}"
-                                     styleClass="ui-button-info">
-                    </p:commandButton>
-                    <h1 style="margin: 0.5rem">#{filtroController.filtroMalla.descripcion}</h1>
-                </div>
-
-                <p:divider />
 
                 <div class="header grid justify-content-center">
-                    <h2 style="margin: 0.5rem">REQUISITOS PARA INSCRIPCIÓN</h2>
+                    <h2 style="margin: 0.5rem">REGISTRAR REEMPLAZO DOCENTE</h2>
                 </div>
 
-                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{requisitoInscripcionController.listado}"
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{reemplazoDocenteController.listado}"
                              reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
                              paginator="true" rows="8" paginatorPosition="bottom">
 
                     <f:facet name="header">
                         <div class="table-header grid">
                             <div class="col-3" style="font-weight: bold">
-                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{requisitoInscripcionController.resetSeleccionado}"
+                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{reemplazoDocenteController.resetSeleccionado}"
                                                  update=":dialogs :dialogs:manage-content"
                                                  oncomplete="PF('manageDialog').show()"
                                                  styleClass="ui-button-info w-full" style="margin-right: .5rem">
@@ -56,13 +46,24 @@
                         <h:outputText value="#{fila + 1}" />
                     </p:column>
 
-                    <p:column headerText="Requisito" sortBy="#{registro.requisito.descripcion}" filterBy="#{registro.requisito.descripcion}">
-                        <h:outputText value="#{registro.requisito.descripcion}"/>
+                    <p:column headerText="Plan Curso" sortBy="#{registro.planCurso.desc}" filterBy="#{registro.planCurso.desc}">
+                        <h:outputText value="#{registro.planCurso.desc}"/>
                     </p:column>
 
-                    <p:column headerText="Fecha limite" sortBy="#{registro.fechaLimite}" filterBy="#{registro.fechaLimite}">
-                        <h:outputText value="#{registro.fechaLimite}">
-                            <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                    <p:column headerText="Docente Reemplazante" sortBy="#{registro.docente.nombre}" filterBy="#{registro.docente.nombre}">
+                        <h:outputText value="#{registro.docente.nombre} #{registro.docente.apellido}"/>
+                    </p:column>
+
+
+                    <p:column headerText="Fecha Inicio" sortBy="#{registro.fecha_ini}" filterBy="#{registro.fecha_ini}">
+                        <h:outputText value="#{registro.fecha_ini}">
+                            <f:convertDateTime type="LocalDateTime" pattern="yyyy.MM.dd 'at' HH:mm:ss"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Fecha Fin" sortBy="#{registro.fecha_fin}" filterBy="#{registro.fecha_fin}">
+                        <h:outputText value="#{registro.fecha_fin}">
+                            <f:convertDateTime type="LocalDateTime" pattern="yyyy.MM.dd 'at' HH:mm:ss"/>
                         </h:outputText>
                     </p:column>
 
@@ -73,14 +74,14 @@
                                              styleClass="edit-button rounded-button ui-button-success"
                                              title="Editar"
                                              process="@this">
-                                <f:setPropertyActionListener value="#{registro}" target="#{requisitoInscripcionController.seleccionado}"/>
+                                <f:setPropertyActionListener value="#{registro}" target="#{reemplazoDocenteController.seleccionado}"/>
                                 <p:resetInput target=":dialogs:manage-content"/>
                             </p:commandButton>
                             <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" style="margin: 0.25rem"
                                              process="@this"
                                              title="Eliminar"
                                              oncomplete="PF('deleteDialog').show()">
-                                <f:setPropertyActionListener value="#{registro}" target="#{requisitoInscripcionController.seleccionado}"/>
+                                <f:setPropertyActionListener value="#{registro}" target="#{reemplazoDocenteController.seleccionado}"/>
                             </p:commandButton>
                         </div>
                     </p:column>
@@ -89,35 +90,58 @@
             </h:form>
 
             <h:form id="dialogs">
-                <p:dialog header="#{requisitoInscripcionController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
+                <p:dialog header="#{reemplazoDocenteController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
                           responsive="true">
                     <p:outputPanel id="manage-content" class="ui-fluid">
-                        <p:outputPanel rendered="#{not empty requisitoInscripcionController.seleccionado}">
+                        <p:outputPanel rendered="#{not empty reemplazoDocenteController.seleccionado}">
                             <div class="field">
-                                <p:outputLabel for="requisito">Requisito</p:outputLabel>
-                                <p:selectOneMenu id="requisito" value="#{requisitoInscripcionController.seleccionado.requisito}" required="true"
+                                <p:outputLabel for="PlanCurso">Plan Curso</p:outputLabel>
+                                <p:selectOneMenu id="PlanCurso" value="#{reemplazoDocenteController.seleccionado.planCurso}" required="true"
                                                  filter="true" filterMatchMode="contains" filterNormalize="true">
                                     <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItems value="#{requisitoInscripcionController.comboRequisitos}" var="combo"
-                                                   itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
-                                    <f:converter binding="#{requisitoConverter}"/>
+                                    <f:selectItems value="#{reemplazoDocenteController.comboPlanCurso}" var="combo"
+                                                   itemLabel="#{combo.desc}" itemValue="#{combo}"/>
+                                    <f:converter binding="#{planCursoConverter}"/>
                                 </p:selectOneMenu>
                             </div>
 
                             <div class="field">
-                                <h:outputLabel for="fecha_limite" value="Fecha Limite" />
-                                <p:datePicker pattern="yyyy-MM-dd" id="fecha_limite" value="#{requisitoInscripcionController.seleccionado.fechaLimite}"
+                                <p:outputLabel for="docente">Docente</p:outputLabel>
+                                <p:selectOneMenu id="docente" value="#{reemplazoDocenteController.seleccionado.docente}" required="true"
+                                                 filter="true" filterMatchMode="contains" filterNormalize="true">
+                                    <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
+                                    <f:selectItems value="#{reemplazoDocenteController.comboDocente}" var="combo"
+                                                   itemLabel="#{combo.nombre} #{combo.apellido}" itemValue="#{combo}"/>
+                                    <f:converter binding="#{docenteConverter}"/>
+                                </p:selectOneMenu>
+                            </div>
+
+
+                            <div class="field">
+                                <h:outputLabel for="fecha_ini" value="Fecha Incio" />
+                                <p:datePicker pattern="dd/mm/yy HH24:MI" id="fecha_ini" value="#{reemplazoDocenteController.seleccionado.fecha_ini}"
                                               required="true"
-                                              converterMessage="Indique la fecha con yyyy-MM-dd" >
-                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
-                                    <f:passThroughAttribute name="type" value="date"/>
+                                              converterMessage="Indique la fecha con dd/mm/yy HH24:MI" >
+                                    <f:convertDateTime type="LocalDateTime" pattern="yyyy.MM.dd 'at' HH:mm:ss z"/>
+                                    <f:passThroughAttribute name="type" value="datetime"/>
                                 </p:datePicker>
                             </div>
+
+                            <div class="field">
+                                <h:outputLabel for="fecha_fin" value="Fecha Fin" />
+                                <p:datePicker pattern="dd/mm/yy HH24:MI" id="fecha_fin" value="#{reemplazoDocenteController.seleccionado.fecha_fin}"
+                                              required="true"
+                                              converterMessage="Indique la fecha con dd/MM/yy HH24:MI" >
+                                    <f:convertDateTime type="LocalDateTime" pattern="dyyyy.MM.dd 'at' HH:mm:ss z"/>
+                                    <f:passThroughAttribute name="type" value="datetime"/>
+                                </p:datePicker>
+                            </div>
+
                         </p:outputPanel>
                     </p:outputPanel>
 
                     <f:facet name="footer">
-                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{requisitoInscripcionController.save}"
+                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{reemplazoDocenteController.save}"
                                          update="manage-content" process="manage-content @this"/>
                         <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
                                          class="ui-button-secondary" type="button"/>
@@ -126,7 +150,7 @@
 
                 <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
                                  message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
-                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{requisitoInscripcionController.delete}"
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{reemplazoDocenteController.delete}"
                                      process="@this" oncomplete="PF('deleteDialog').hide()"/>
                     <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                                      onclick="PF('deleteDialog').hide()"/>

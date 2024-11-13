@@ -12,6 +12,7 @@ public class MallaDetRepository extends AbstractCrudRepository<MallaDet>{
     protected String select() {
         return "SELECT r FROM MallaDet r " +
                         "LEFT OUTER JOIN FETCH r.malla "+
+                        "LEFT OUTER JOIN FETCH r.malla.carrera "+
                         "LEFT OUTER JOIN FETCH r.materia "+
                         "LEFT OUTER JOIN FETCH r.mallaDetRef";
     }

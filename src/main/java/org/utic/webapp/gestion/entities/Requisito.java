@@ -1,7 +1,7 @@
 package org.utic.webapp.gestion.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "requisitos")
@@ -9,8 +9,10 @@ public class Requisito extends AbstractEntity<Requisito> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotEmpty
     private String descripcion;
+
     @NotEmpty
     private String estado;
     @Override

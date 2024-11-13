@@ -9,5 +9,4 @@ public class RequisitoRepository extends AbstractCrudRepository<Requisito>{
     protected String select() {
         return "SELECT r FROM Requisito r ";
     }
-
 }

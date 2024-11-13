@@ -5,7 +5,21 @@ AS $function$
 declare
 	v_requisitos integer;
 	v_req_presento integer;
+v_alumno integer;
 begin
+	select count(*)
+	into v_alumno
+	from mallas m
+	where m.id = new.id_malla
+	and m.cupos <= (select count(*)
+					from inscripciones_mallas im
+					where im.id_malla = new.id_malla)
+	;
+	if v_alumno <> 0 then
+		raise exception 'Cantidad de cupos lleno! %',v_alumno;
+	end if;
+
+
 	if new.nro_semestre = 1 then
 			select count(*)
 			into v_requisitos
@@ -31,11 +45,3 @@ begin
 end;
 $function$
 ;
-
-
-create trigger tr_ins_ins_inscripcion after
-insert on inscripciones_mallas for each row execute procedure f_tr_ins_inscripcion()
----
-
-create trigger tr_upd_ins_inscripcion after
-update on inscripciones_mallas for each row execute procedure f_tr_ins_inscripcion()

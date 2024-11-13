@@ -14,6 +14,7 @@ public class PlanCursoRepository extends AbstractCrudRepository<PlanCurso>{
                 "LEFT OUTER JOIN FETCH r.turno " +
                 "LEFT OUTER JOIN FETCH r.mallaDet " +
                 "LEFT OUTER JOIN FETCH r.mallaDet.malla " +
+                "LEFT OUTER JOIN FETCH r.mallaDet.malla.carrera " +
                 "LEFT OUTER JOIN FETCH r.mallaDet.materia " +
                 "LEFT OUTER JOIN FETCH r.docente ";
     }

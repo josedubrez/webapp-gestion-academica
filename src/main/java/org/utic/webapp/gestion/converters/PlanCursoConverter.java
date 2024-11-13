@@ -2,7 +2,7 @@ package org.utic.webapp.gestion.converters;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-import org.utic.webapp.gestion.entities.PlanCurso;
+import org.utic.webapp.gestion.entities.*;
 
 @RequestScoped
 @Named("planCursoConverter")
