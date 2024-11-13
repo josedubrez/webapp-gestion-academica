@@ -27,7 +27,7 @@
                 <p:outputPanel id="manage-content" class="ui-fluid" style="col-12 md:col-4">
                     <div class="field">
                         <p:outputLabel for="malla">Malla</p:outputLabel>
-                        <p:selectOneMenu id="malla" value="#{reporteMallas.filtro.malla}" required="true"
+                        <p:selectOneMenu id="malla" value="#{reporteMallas.filtro.malla}"
                                          filter="true" filterMatchMode="contains" filterNormalize="true">
                             <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
                             <f:selectItems value="#{reporteMallas.comboMallas}" var="combo"
