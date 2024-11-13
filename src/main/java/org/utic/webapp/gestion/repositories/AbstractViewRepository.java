@@ -14,7 +14,7 @@ public abstract class AbstractViewRepository<T extends EntityWithId> implements 
 
     @Override
     public List<T> getAll() {
-        return em.createQuery(select() + " " + "ORDER BY r.id ASC", entityClass).getResultList();
+        return em.createQuery(select(), entityClass).getResultList();
     }
 
     @Override

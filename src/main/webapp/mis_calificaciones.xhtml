@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/main.xhtml">
+
+    <ui:define name="content">
+
+        <div class="card crud-demo">
+            <h:form id="form">
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="header grid justify-content-center" style="margin: 1rem">
+                    <p:commandButton value="Volver" icon="pi pi-chevron-left" style="margin-right: 2rem"
+                                     process="@this"
+                                     action="#{calificacionController.volverAMisPlanesCursos}"
+                                     styleClass="ui-button-info">
+                    </p:commandButton>
+                    <h1 style="margin: 0.5rem">#{filtroController.filtroPlanCurso.mallaDet.materia.descripcion} - #{filtroController.filtroPlanCurso.mallaDet.malla.descripcion}</h1>
+                </div>
+
+                <p:divider />
+
+                <div class="header grid justify-content-center">
+                    <h2 style="margin: 0.5rem">CALIFICACIONES</h2>
+                </div>
+
+                <p:divider />
+
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" rowIndexVar="fila" value="#{calificacionController.listado}"
+                             reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
+                             paginator="true" rows="8" paginatorPosition="bottom">
+
+                    <f:facet name="header">
+                        <div class="table-header grid">
+                            <div class="col-12">
+                                <span class="w-full filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                                    <p:inputText id="globalFilter" class="w-full" onkeyup="PF('dtListado').filter()" placeholder="Busqueda por cualquiera de los campos"/>
+                                </span>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID" sortBy="#{registro.id}" filterBy="#{registro.id}" rendered="false">
+                        <h:outputText value="#{registro.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Orden">
+                        <h:outputText value="#{fila + 1}" />
+                    </p:column>
+
+                    <p:column headerText="Nro. Cedula" sortBy="#{registro.alumno.nroCedula}" filterBy="#{registro.alumno.nroCedula}">
+                        <h:outputText value="#{registro.alumno.nroCedula}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre Alumno" sortBy="#{registro.alumno.apellido}, #{registro.alumno.nombre}" filterBy="#{registro.alumno.apellido}, #{registro.alumno.nombre}">
+                        <h:outputText value="#{registro.alumno.apellido}, #{registro.alumno.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje Trabajos Clases" sortBy="#{registro.puntajeTrabajosClases}" filterBy="#{registro.puntajeTrabajosClases}">
+                        <h:outputText value="#{registro.puntajeTrabajosClases}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje Trabajos Practicos" sortBy="#{registro.puntajeTrabajoPractico}" filterBy="#{registro.puntajeTrabajoPractico}">
+                        <h:outputText value="#{registro.puntajeTrabajoPractico}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje Examen Parcial" sortBy="#{registro.puntajeExamenParcial}" filterBy="#{registro.puntajeExamenParcial}">
+                        <h:outputText value="#{registro.puntajeExamenParcial}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje Examen Final" sortBy="#{registro.puntajeExamenFinal}" filterBy="#{registro.puntajeExamenFinal}">
+                        <h:outputText value="#{registro.puntajeExamenFinal}"/>
+                    </p:column>
+
+                    <p:column headerText="Calificacion" sortBy="#{registro.calificacion}" filterBy="#{registro.calificacion}">
+                        <h:outputText value="#{registro.calificacion}#{registro.felicitado ? 'F' : ''}"
+                                      style="font-weight: bold; font-size: 1.5rem"/>
+                    </p:column>
+
+                    <p:column exportable="false" ariaHeaderText="Actions">
+                        <div class="grid justify-content-center">
+                            <p:commandButton class="ui-button-danger rounded-button"
+                                             icon="pi pi-trash" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Eliminar"
+                                             oncomplete="PF('deleteDialog').show()">
+                                <f:setPropertyActionListener value="#{registro}" target="#{calificacionController.seleccionado}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <h:form id="dialogs">
+                <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
+                                 message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{calificacionController.delete}"
+                                     process="@this" oncomplete="PF('deleteDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteDialog').hide()"/>
+                </p:confirmDialog>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

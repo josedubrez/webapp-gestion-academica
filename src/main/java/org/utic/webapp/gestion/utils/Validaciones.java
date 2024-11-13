@@ -1,7 +1,5 @@
 package org.utic.webapp.gestion.utils;
 
-import jakarta.validation.ConstraintViolationException;
-
 import java.sql.SQLException;
 
 public class Validaciones {

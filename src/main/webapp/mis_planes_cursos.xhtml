@@ -80,30 +80,42 @@
                         <p:selectBooleanCheckbox value="#{registro.aprobado}" disabled="true"/>
                     </p:column>
 
-                    <p:column exportable="false" ariaHeaderText="Actions">
+                    <p:column class="col-2" exportable="false" ariaHeaderText="Actions">
                         <div class="grid justify-content-center flex-nowrap">
                             <p:commandButton class="ui-button-info rounded-button" icon="pi pi-calendar-clock" style="margin: 0.25rem"
                                              process="@this"
-                                             title="Ver horarios"
+                                             title="Horarios"
                                              action="#{misPlanCursoController.irAMisHorarios}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
                             </p:commandButton>
                             <p:commandButton class="ui-button-info rounded-button" icon="pi pi-sliders-h" style="margin: 0.25rem"
                                              process="@this"
-                                             title="Ver distribucion de puntajes"
+                                             title="Distribucion de Puntajes"
                                              action="#{misPlanCursoController.irAMisDistribucionesPuntajes}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
                             </p:commandButton>
                             <p:commandButton class="ui-button-info rounded-button" icon="pi pi-file-pdf" style="margin: 0.25rem"
                                              process="@this"
-                                             title="Ver trabajos practicos"
+                                             title="Trabajos Practicos"
                                              action="#{misPlanCursoController.irAMisTrabajosPracticos}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
                             </p:commandButton>
                             <p:commandButton class="ui-button-info rounded-button" icon="pi pi-clipboard" style="margin: 0.25rem"
                                              process="@this"
-                                             title="Ver examenes"
+                                             title="Examenes"
                                              action="#{misPlanCursoController.irAMisExamenes}">
+                                <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-tags" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Clases"
+                                             action="#{misPlanCursoController.irAMisClases}">
+                                <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-info rounded-button" icon="pi pi-list" style="margin: 0.25rem"
+                                             process="@this"
+                                             title="Calificaciones"
+                                             action="#{misPlanCursoController.irAMisCalificaciones}">
                                 <f:setPropertyActionListener value="#{registro}" target="#{filtroController.filtroPlanCurso}"/>
                             </p:commandButton>
                         </div>

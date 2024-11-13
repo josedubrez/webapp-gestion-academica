@@ -40,4 +40,12 @@ public class MisPlanCursoController extends AbstractCrudController<PlanCurso>{
     public String irAMisDistribucionesPuntajes(){
         return "mis_distribuciones_escalas?faces-redirect=true";
     }
+
+    public String irAMisClases(){
+        return "mis_clases?faces-redirect=true";
+    }
+
+    public String irAMisCalificaciones(){
+        return "mis_calificaciones?faces-redirect=true";
+    }
 }

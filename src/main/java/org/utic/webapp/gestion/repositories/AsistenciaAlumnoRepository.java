@@ -20,7 +20,8 @@ public class AsistenciaAlumnoRepository extends AbstractCrudRepository<Asistenci
     }
 
     public List<AsistenciaAlumno> getAllByClase(Clase clase){
-        return super.em.createQuery(select() + " WHERE r.clase.id = :id_clase " + "ORDER BY r.id DESC", super.entityClass)
+        return super.em.createQuery(select() + " WHERE r.clase.id = :id_clase "
+                                                + " ORDER BY r.alumno.apellido ASC, r.alumno.nombre ASC", super.entityClass)
                 .setParameter("id_clase", clase.getId())
                 .getResultList();
     }

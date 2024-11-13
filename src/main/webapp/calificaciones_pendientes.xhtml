@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/main.xhtml">
+
+    <ui:define name="content">
+
+        <div class="card crud-demo">
+            <h:form id="form">
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="header grid justify-content-center">
+                    <h1 style="margin: 0.5rem">CONFIRMAR CALIFICACIONES</h1>
+                </div>
+
+                <p:divider />
+
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="reg" rowIndexVar="fila" value="#{viewCalificacionPendienteController.listado}"
+                             reflow="true" styleClass="table" rowKey="#{reg.id}" globalFilterOnly="#{true}"
+                             paginator="true" rows="10" paginatorPosition="bottom">
+
+                    <f:facet name="header">
+                        <div class="table-header grid">
+                            <div class="col-12">
+                                <span class="w-full filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                                    <p:inputText id="globalFilter" class="w-full" onkeyup="PF('dtListado').filter()" placeholder="Busqueda por cualquiera de los campos"/>
+                                </span>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID" filterBy="#{reg.id}" rendered="false">
+                        <h:outputText value="#{reg.id}"/>
+                    </p:column>
+
+                    <p:column headerText="#">
+                        <h:outputText value="#{fila + 1}" />
+                    </p:column>
+
+                    <p:column headerText="Materia" sortBy="#{reg.planCurso.mallaDet.materia.descripcion}" filterBy="#{reg.planCurso.mallaDet.materia.descripcion}">
+                        <h:outputText value="#{reg.planCurso.mallaDet.materia.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Carrera" sortBy="#{reg.planCurso.mallaDet.malla.carrera.descripcion}" filterBy="#{reg.planCurso.mallaDet.malla.carrera.descripcion}">
+                        <h:outputText value="#{reg.planCurso.mallaDet.malla.carrera.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Malla" sortBy="#{reg.planCurso.mallaDet.malla.anio}" filterBy="#{reg.planCurso.mallaDet.malla.anio}">
+                        <h:outputText value="#{reg.planCurso.mallaDet.malla.anio}"/>
+                    </p:column>
+
+                    <p:column headerText="Semestre" sortBy="#{reg.planCurso.mallaDet.nroSemestre}" filterBy="#{reg.planCurso.mallaDet.nroSemestre}">
+                        <h:outputText value="#{reg.planCurso.mallaDet.nroSemestre}"/>
+                    </p:column>
+
+                    <p:column headerText="Sede" sortBy="#{reg.planCurso.sede.descripcion}" filterBy="#{reg.planCurso.sede.descripcion}">
+                        <h:outputText value="#{reg.planCurso.sede.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Turno" sortBy="#{reg.planCurso.turno.descripcion}" filterBy="#{reg.planCurso.turno.descripcion}">
+                        <h:outputText value="#{reg.planCurso.turno.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Nro. Cedula" sortBy="#{reg.alumno.nroCedula}" filterBy="#{reg.alumno.nroCedula}">
+                        <h:outputText value="#{reg.alumno.nroCedula}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre Alumno" sortBy="#{reg.alumno.apellido}, #{reg.alumno.nombre}" filterBy="#{reg.alumno.apellido}, #{reg.alumno.nombre}">
+                        <h:outputText value="#{reg.alumno.apellido}, #{reg.alumno.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje Trabajos Clases" sortBy="#{reg.puntajeTrabajosClases}" filterBy="#{reg.puntajeTrabajosClases}">
+                        <h:outputText value="#{reg.puntajeTrabajosClases}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje Trabajos Practicos" sortBy="#{reg.puntajeTrabajoPractico}" filterBy="#{reg.puntajeTrabajoPractico}">
+                        <h:outputText value="#{reg.puntajeTrabajoPractico}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje Examen Parcial" sortBy="#{reg.puntajeExamenParcial}" filterBy="#{reg.puntajeExamenParcial}">
+                        <h:outputText value="#{reg.puntajeExamenParcial}"/>
+                    </p:column>
+
+                    <p:column headerText="Puntaje Examen Final" sortBy="#{reg.puntajeExamenFinal}" filterBy="#{reg.puntajeExamenFinal}">
+                        <h:outputText value="#{reg.puntajeExamenFinal}"/>
+                    </p:column>
+
+                    <p:column headerText="Calificacion" sortBy="#{reg.calificacion}" filterBy="#{reg.calificacion}">
+                        <h:outputText value="#{reg.calificacion}#{reg.felicitado ? 'F' : ''}"
+                                      style="font-weight: bold; font-size: 1.5rem"/>
+                    </p:column>
+
+                    <p:column exportable="false" ariaHeaderText="Actions">
+                        <div class="grid justify-content-center flex-nowrap">
+                            <p:commandButton class="ui-button-success rounded-button" icon="pi pi-check-circle" style="margin: 0.25rem"
+                                             title="Confirmar"
+                                             action="#{viewCalificacionPendienteController.insertCalificacion}">
+                                <f:setPropertyActionListener value="#{reg}" target="#{viewCalificacionPendienteController.registro}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

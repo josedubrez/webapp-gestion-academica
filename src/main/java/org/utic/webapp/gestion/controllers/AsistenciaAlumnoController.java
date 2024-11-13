@@ -19,4 +19,8 @@ public class AsistenciaAlumnoController extends AbstractCrudController<Asistenci
         AsistenciaAlumnoService aas = (AsistenciaAlumnoService) super.servicio;
         super.listado = aas.getAllByClase(filtrador.getFiltroClase());
     }
+
+    public String volverAMisClases() {
+        return "mis_clases?faces-redirect=true";
+    }
 }

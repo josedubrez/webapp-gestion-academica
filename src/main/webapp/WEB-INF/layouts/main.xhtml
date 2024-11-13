@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="#{lenguajeController.locale}">
+<html lang="es">
 <f:view xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -102,9 +102,10 @@
                             <p:menuitem value="Confirmar Clase" outcome="confirmar_clase"/>
                             <p:menuitem value="Mis Materias" outcome="mis_planes_cursos"/>
                             <p:menuitem value="Llamar Asistencia" outcome="mis_asistencias_alumnos"/>
+                            <p:menuitem value="Confirmar Calificaciones" outcome="calificaciones_pendientes"/>
                         </p:submenu>
                         <p:submenu class="menu" label="Informes">
-                            <p:menuitem value="Informe 1"/>
+                            <p:menuitem value="Detalle de Malla" outcome="rep_mallas" />
                             <p:menuitem value="Informe 2"/>
                             <p:menuitem value="Informe 3"/>
                         </p:submenu>
