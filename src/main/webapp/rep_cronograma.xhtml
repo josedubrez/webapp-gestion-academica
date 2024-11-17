@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/main.xhtml">
+
+    <ui:define name="content">
+
+        <div class="card grid justify-content-center">
+            <h:form class="col-4" id="form">
+
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="header grid justify-content-center">
+                    <h1 style="margin: 0.5rem">REPORTE DE CRONOGRAMAS</h1>
+                </div>
+
+                <p:divider />
+
+                <div class="header grid justify-content-center">
+                    <h2 style="margin: 0.5rem">Filtros Disponibles</h2>
+                </div>
+
+                <div class="header grid justify-content-center">
+                    <h4 style="margin: 0.5rem">* campos obligatorios</h4>
+                </div>
+
+                <p:divider />
+
+                <p:outputPanel id="manage-content" class="ui-fluid" style="col-12 md:col-4">
+                    <div class="field">
+                        <p:outputLabel for="malla">Malla *</p:outputLabel>
+                        <p:selectOneMenu id="malla" value="#{reporteCronograma.filtro.malla}"
+                                         filter="true" filterMatchMode="contains" filterNormalize="true">
+                            <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
+                            <f:selectItems value="#{reporteCronograma.comboMallas}" var="combo"
+                                           itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
+                            <f:converter binding="#{mallaConverter}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="field">
+                        <p:outputLabel for="nro_semestre">Nro Semestre *</p:outputLabel>
+                        <p:spinner id="nro_semestre" min="1" max="20" value="#{reporteCronograma.filtro.nroSemestre}" />
+                    </div>
+                    <div class="field">
+                        <p:outputLabel for="plan_curso">Plan Curso</p:outputLabel>
+                        <p:selectOneMenu id="plan_curso" value="#{reporteAsistencias.filtro.planCurso}"
+                                         filter="true" filterMatchMode="contains" filterNormalize="true">
+                            <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
+                            <f:selectItems value="#{reporteAsistencias.comboPlanesCursos}" var="combo"
+                                           itemLabel="#{combo.desc}" itemValue="#{combo}"/>
+                            <f:converter binding="#{planCursoConverter}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="field">
+                        <p:outputLabel for="docente">Docente</p:outputLabel>
+                        <p:selectOneMenu id="docente" value="#{reporteAsistencias.filtro.docente}"
+                                         filter="true" filterMatchMode="contains" filterNormalize="true">
+                            <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
+                            <f:selectItems value="#{reporteAsistencias.comboDocentes}" var="combo"
+                                           itemLabel="#{combo.desc}" itemValue="#{combo}"/>
+                            <f:converter binding="#{docenteConverter}"/>
+                        </p:selectOneMenu>
+                    </div>
+
+                    <p:divider />
+                    <div class="field">
+                        <p:commandButton class="col-3" value="Generar Reporte"
+                                         actionListener="#{reporteCronograma.generar}" ajax="false"
+                                         styleClass="ui-button-info w-full" style="margin-bottom: 2rem"
+                        />
+                    </div>
+                </p:outputPanel>
+
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

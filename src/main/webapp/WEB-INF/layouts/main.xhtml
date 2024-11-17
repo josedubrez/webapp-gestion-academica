@@ -73,7 +73,7 @@
 
                         <p:submenu class="menu" label="Malla Curricular" rendered="#{viewPermisoUsuarioController.registro.coordinacion}">
                             <p:menuitem value="Mallas Curriculares" outcome="mallas"/>
-                            <p:menuitem value="Plan de Dursos" outcome="planes_cursos"/>
+                            <p:menuitem value="Plan de Cursos" outcome="planes_cursos"/>
                             <p:menuitem value="Reemplazo Docente" outcome="reemplazo_docente"/>
                             <p:menuitem value="Requisitos" outcome="requisitos"/>
                         </p:submenu>
@@ -106,13 +106,14 @@
                         </p:submenu>
                         <p:submenu class="menu" label="Informes">
                             <p:menuitem value="Detalle de Malla" outcome="rep_mallas" />
-                            <p:menuitem value="Informe 2"/>
-                            <p:menuitem value="Informe 3"/>
+                            <p:menuitem value="Asistencias" outcome="rep_asistencias" />
+                            <p:menuitem value="Cronogramas" outcome="rep_cronograma" />
+                            <p:menuitem value="Contratos" outcome="rep_contrato" />
                         </p:submenu>
                     </p:panelMenu>
                 </div>
                 <div class="col-12 md:col-10 mb-2">
-                    <p:messages globalOnly="true" closable="true"/>
+                    <!--<p:messages globalOnly="true" closable="true"/>-->
                     <ui:insert name="content"/>
                 </div>
             </div>

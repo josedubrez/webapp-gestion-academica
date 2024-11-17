@@ -3,12 +3,10 @@ package org.utic.webapp.gestion.controllers;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import org.primefaces.model.file.UploadedFile;
 import org.utic.webapp.gestion.entities.Alumno;
-import org.utic.webapp.gestion.entities.Docente;
 import org.utic.webapp.gestion.entities.JustificativoAlumno;
-import org.utic.webapp.gestion.entities.PermisoDocente;
 import org.utic.webapp.gestion.services.JustificativoAlumnoService;
-import org.utic.webapp.gestion.services.PermisoDocenteService;
 
 import java.util.List;
 
@@ -17,6 +15,8 @@ import java.util.List;
 public class JustificativoAlumnoController extends AbstractCrudController<JustificativoAlumno>{
 
     private List<Alumno> comboAlumnos;
+
+    private UploadedFile file;
 
     @PostConstruct
     public void init() {
@@ -32,5 +32,15 @@ public class JustificativoAlumnoController extends AbstractCrudController<Justif
 
     public List<Alumno> getComboAlumnos() {
         return comboAlumnos;
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+    public void setFile(UploadedFile file) {
+        this.file = file;
+        if (file != null){
+            super.seleccionado.setDirArchivo(this.file.getFileName());
+        }
     }
 }

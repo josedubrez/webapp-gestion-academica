@@ -85,4 +85,9 @@ public class Alumno extends AbstractEntity<Alumno>{
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getDesc(){
+        StringBuilder sb = new StringBuilder();
+        return sb.append("(").append(nroCedula).append(") ").append(apellido).append(", ").append(nombre).toString();
+    }
 }

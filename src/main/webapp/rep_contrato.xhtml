@@ -13,7 +13,7 @@
                 <p:growl id="messages" showDetail="true"/>
 
                 <div class="header grid justify-content-center">
-                    <h1 style="margin: 0.5rem">REPORTE DE MALLAS</h1>
+                    <h1 style="margin: 0.5rem">REPORTE DE CONTRATOS</h1>
                 </div>
 
                 <p:divider />
@@ -30,19 +30,19 @@
 
                 <p:outputPanel id="manage-content" class="ui-fluid" style="col-12 md:col-4">
                     <div class="field">
-                        <p:outputLabel for="malla">Malla *</p:outputLabel>
-                        <p:selectOneMenu id="malla" value="#{reporteMallas.filtro.malla}"
+                        <p:outputLabel for="docente">Docente *</p:outputLabel>
+                        <p:selectOneMenu id="docente" value="#{reporteContrato.filtro.docente}"
                                          filter="true" filterMatchMode="contains" filterNormalize="true">
                             <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                            <f:selectItems value="#{reporteMallas.comboMallas}" var="combo"
-                                           itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
-                            <f:converter binding="#{mallaConverter}"/>
+                            <f:selectItems value="#{reporteContrato.comboDocentes}" var="combo"
+                                           itemLabel="#{combo.desc}" itemValue="#{combo}"/>
+                            <f:converter binding="#{docenteConverter}"/>
                         </p:selectOneMenu>
                     </div>
                     <p:divider />
                     <div class="field">
                         <p:commandButton class="col-3" value="Generar Reporte"
-                                         actionListener="#{reporteMallas.generar}" ajax="false"
+                                         actionListener="#{reporteContrato.generar}" ajax="false"
                                          styleClass="ui-button-info w-full" style="margin-bottom: 2rem"
                         />
                     </div>

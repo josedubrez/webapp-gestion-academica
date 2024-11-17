@@ -97,4 +97,9 @@ public class Docente extends AbstractEntity<Docente>{
     public void setTitulo(Titulo titulo) {
         this.titulo = titulo;
     }
+
+    public String getDesc(){
+        StringBuilder sb = new StringBuilder();
+        return sb.append("(").append(nroCedula).append(") ").append(apellido).append(", ").append(nombre).toString();
+    }
 }

@@ -6,7 +6,8 @@ select
 	row_number() over() as id,
 	ss.*
 from (
-	select 
+	select
+		m.id as id_malla,
 	    c.descripcion || ' ' || m.anio::varchar as desc_malla,
 	    'SEMESTRE ' || md.nro_semestre::varchar as nro_semestre,
 	    md.horas_catedra::varchar as horas_catedra,

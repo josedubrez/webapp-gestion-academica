@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class ReportFilter {
     private LocalDate fechaDesde;
     private LocalDate fechaHasta;
+    private Integer nroSemestre;
     private Malla malla;
     private MallaDet mallaDet;
     private Docente docente;
@@ -69,5 +70,13 @@ public class ReportFilter {
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
+    }
+
+    public Integer getNroSemestre() {
+        return nroSemestre;
+    }
+
+    public void setNroSemestre(Integer nroSemestre) {
+        this.nroSemestre = nroSemestre;
     }
 }
