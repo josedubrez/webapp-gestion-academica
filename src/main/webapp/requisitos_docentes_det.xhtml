@@ -82,7 +82,7 @@
                 </p:dataTable>
             </h:form>
 
-            <h:form id="dialogs">
+            <h:form id="dialogs" enctype="multipart/form-data">
                 <p:dialog header="#{requisitoDocenteDetController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
                           responsive="true">
                     <p:outputPanel id="manage-content" class="ui-fluid">
@@ -100,8 +100,7 @@
                             </div>
 
                             <div class="field">
-                                <p:outputLabel for="dir_archivo">Archivo</p:outputLabel>
-                                <p:inputText id="dir_archivo" value="#{requisitoDocenteDetController.seleccionado.dirArchivo}"/>
+                                <p:fileUpload id="dir_archivo" value="#{requisitoDocenteDetController.file}" mode="simple" skinSimple="true"/>
                             </div>
 
                         </p:outputPanel>

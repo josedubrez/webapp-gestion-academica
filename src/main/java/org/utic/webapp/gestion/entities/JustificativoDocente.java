@@ -4,26 +4,27 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "deserciones_alumnos")
-public class DesercionAlumno extends AbstractEntity<DesercionAlumno>{
+@Table(name = "justificativos_docentes")
+public class JustificativoDocente extends AbstractEntity<JustificativoDocente>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_alumno")
-    private Alumno alumno;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_malla")
-    private Malla malla;
+    @JoinColumn(name="id_docente")
+    private Docente docente;
 
     @NotEmpty
     private String motivo;
 
     private LocalDate fecha;
+
+
+    @Column(name = "dir_archivo")
+    private String dirArchivo;
 
     @Override
     public Long getId() {
@@ -34,6 +35,13 @@ public class DesercionAlumno extends AbstractEntity<DesercionAlumno>{
         this.id = id;
     }
 
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
 
     public String getMotivo() {
         return motivo;
@@ -51,27 +59,12 @@ public class DesercionAlumno extends AbstractEntity<DesercionAlumno>{
         this.fecha = fecha;
     }
 
-    public Alumno getAlumno() {
-        return alumno;
+    public String getDirArchivo() {
+        return dirArchivo;
     }
 
-    public void setAlumno(Alumno alumno) {
-        this.alumno = alumno;
+    public void setDirArchivo(String dirArchivo) {
+        this.dirArchivo = dirArchivo;
     }
 
-    /*public LocalDate getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(LocalDate fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }*/
-
-    public Malla getMalla() {
-        return malla;
-    }
-
-    public void setMalla(Malla malla) {
-        this.malla = malla;
-    }
 }

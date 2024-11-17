@@ -141,7 +141,7 @@
                             </div>
                             <div class="field">
                                 <p:selectBooleanCheckbox id="aprobado" value="#{mallaController.seleccionado.aprobado}" itemLabel="Aprobado"
-                                                        rendered="#{(mallaController.seleccionado.id > 0)}"/>
+                                                        rendered="#{(mallaController.seleccionado.id > 0) and viewPermisoUsuarioController.registro.directivo}"/>
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>

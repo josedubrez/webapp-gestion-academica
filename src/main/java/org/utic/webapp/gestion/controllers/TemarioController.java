@@ -25,7 +25,7 @@ public class TemarioController extends AbstractCrudController<Temario>{
         this.listado = mds.getTemariosAllByMallaDet(filtrador.getFiltroMallaDet());
         super.resetSeleccionado();
         this.comboTemarios = this.listado;
-        System.out.println("TEMARIO_CONTROLLER.INIT: " + this + " " + filtrador.getFiltroMallaDet());
+       // System.out.println("TEMARIO_CONTROLLER.INIT: " + this + " " + filtrador.getFiltroMallaDet());
     }
 
     @Override

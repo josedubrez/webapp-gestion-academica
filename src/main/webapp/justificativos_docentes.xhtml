@@ -15,13 +15,13 @@
                     <h1 style="margin: 0.5rem">JUSTIFICATIVOS DOCENTES</h1>
                 </div>
 
-                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{permisoDocenteController.listado}"
+                <p:dataTable id="dt-listado" widgetVar="dtListado" var="registro" value="#{justificativoDocenteController.listado}"
                              reflow="true" styleClass="table" rowKey="#{registro.id}" globalFilterOnly="#{true}"
                              paginator="true" rows="10" paginatorPosition="bottom">
                     <f:facet name="header">
                         <div class="table-header grid">
                             <div class="col-3" style="font-weight: bold">
-                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{permisoDocenteController.resetSeleccionado}"
+                                <p:commandButton class="col-3" value="Nuevo" icon="pi pi-plus" actionListener="#{justificativoDocenteController.resetSeleccionado}"
                                                  update=":dialogs :dialogs:manage-content"
                                                  oncomplete="PF('manageDialog').show()"
                                                  styleClass="ui-button-info w-full" style="margin-right: .5rem">
@@ -65,38 +65,38 @@
                                              styleClass="edit-button rounded-button ui-button-success"
                                              title="Editar"
                                              process="@this">
-                                <f:setPropertyActionListener value="#{registro}" target="#{permisoDocenteController.seleccionado}"/>
+                                <f:setPropertyActionListener value="#{registro}" target="#{justificativoDocenteController.seleccionado}"/>
                                 <p:resetInput target=":dialogs:manage-content"/>
                             </p:commandButton>
                             <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" style="margin: 0.25rem"
                                              process="@this"
                                              title="Eliminar"
                                              oncomplete="PF('deleteDialog').show()">
-                                <f:setPropertyActionListener value="#{registro}" target="#{permisoDocenteController.seleccionado}"/>
+                                <f:setPropertyActionListener value="#{registro}" target="#{justificativoDocenteController.seleccionado}"/>
                             </p:commandButton>
                         </div>
                     </p:column>
                 </p:dataTable>
             </h:form>
 
-            <h:form id="dialogs">
-                <p:dialog header="#{permisoDocenteController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
+            <h:form id="dialogs" enctype="multipart/form-data">
+                <p:dialog header="#{justificativoDocenteController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
                           responsive="true">
                     <p:outputPanel id="manage-content" class="ui-fluid">
-                        <p:outputPanel rendered="#{not empty permisoDocenteController.seleccionado}">
+                        <p:outputPanel rendered="#{not empty justificativoDocenteController.seleccionado}">
                             <div class="field">
                                 <p:outputLabel for="docente">Docente</p:outputLabel>
-                                <p:selectOneMenu id="docente" value="#{permisoDocenteController.seleccionado.docente}" required="true"
+                                <p:selectOneMenu id="docente" value="#{justificativoDocenteController.seleccionado.docente}" required="true"
                                                  filter="true" filterMatchMode="contains" filterNormalize="true">
                                     <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                                    <f:selectItems value="#{permisoDocenteController.comboDocentes}" var="combo"
+                                    <f:selectItems value="#{justificativoDocenteController.comboDocentes}" var="combo"
                                                    itemLabel="#{combo.nombre} #{combo.apellido}" itemValue="#{combo}"/>
                                     <f:converter binding="#{docenteConverter}"/>
                                 </p:selectOneMenu>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="fecha" value="Fecha" />
-                                <p:datePicker pattern="yyyy-MM-dd" id="fecha" value="#{permisoDocenteController.seleccionado.fecha}"
+                                <p:datePicker pattern="yyyy-MM-dd" id="fecha" value="#{justificativoDocenteController.seleccionado.fecha}"
                                               required="true"
                                               converterMessage="Indique la fecha con yyyy-MM-dd" >
                                     <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
@@ -105,17 +105,16 @@
                             </div>
                             <div class="field">
                                 <p:outputLabel for="motivo">Motivo</p:outputLabel>
-                                <p:inputText id="motivo" value="#{permisoDocenteController.seleccionado.motivo}"/>
+                                <p:inputText id="motivo" value="#{justificativoDocenteController.seleccionado.motivo}"/>
                             </div>
                             <div class="field">
-                                <p:outputLabel for="dir_archivo">Archivo</p:outputLabel>
-                                <p:inputText id="dir_archivo" value="#{permisoDocenteController.seleccionado.dirArchivo}"/>
+                                <p:fileUpload id="dir_archivo" value="#{justificativoDocenteController.file}" mode="simple" skinSimple="true"/>
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>
 
                     <f:facet name="footer">
-                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{permisoDocenteController.save}"
+                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{justificativoDocenteController.save}"
                                          update="manage-content" process="manage-content @this"/>
                         <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
                                          class="ui-button-secondary" type="button"/>

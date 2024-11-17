@@ -74,7 +74,6 @@
                         <p:submenu class="menu" label="Malla Curricular" rendered="#{viewPermisoUsuarioController.registro.coordinacion}">
                             <p:menuitem value="Mallas Curriculares" outcome="mallas"/>
                             <p:menuitem value="Plan de Cursos" outcome="planes_cursos"/>
-                            <p:menuitem value="Reemplazo Docente" outcome="reemplazo_docente"/>
                             <p:menuitem value="Requisitos" outcome="requisitos"/>
                         </p:submenu>
 
@@ -83,21 +82,30 @@
                             <p:menuitem value="Inscripción" outcome="inscripciones"/>
                         </p:submenu>
 
-                        <p:submenu class="menu" label="Gestion Documental" rendered="#{viewPermisoUsuarioController.registro.documental}">
-                            <p:menuitem value="Asistencias Alumnos" outcome="asistencias_alumnos"/>
+                        <p:submenu class="menu" label="Justificativos de Alumnos" rendered="#{viewPermisoUsuarioController.registro.secretaria}">
                             <p:menuitem value="Justificativos Alumnos" outcome="justificativos_alumnos"/>
-                            <p:menuitem value="Sanciones" outcome="sanciones_alumnos"/>
-                            <p:menuitem value="Deserción" outcome="deserciones_alumnos"/>
-                            <p:menuitem value="Calificaciones" outcome="calificaciones"/>
                         </p:submenu>
 
-                        <p:submenu class="menu" label="Gestion Operativa" rendered="#{viewPermisoUsuarioController.registro.operativo}">
+                        <p:submenu class="menu" label="Sanciones y Deserciones" rendered="#{viewPermisoUsuarioController.registro.coordinacion}">
+                            <p:menuitem value="Sanciones" outcome="sanciones_alumnos"/>
+                            <p:menuitem value="Deserción" outcome="deserciones_alumnos"/>
+                        </p:submenu>
+
+                        <p:submenu class="menu" label="Gestion Operativa" rendered="#{viewPermisoUsuarioController.registro.coordinacion}">
                             <p:menuitem value="Requisitos Docentes" outcome="requisitos_docentes"/>
-                            <p:menuitem value="Docentes" outcome="docentes"/>
                             <p:menuitem value="Postulantes" outcome="postulantes"/>
+                            <p:menuitem value="Docentes" outcome="docentes"/>
                             <p:menuitem value="Justificativos Docentes" outcome="justificativos_docentes"/>
                             <p:menuitem value="Permisos Docentes" outcome="permisos_docentes"/>
+                            <p:menuitem value="Reemplazo Docente" outcome="reemplazo_docente"/>
                         </p:submenu>
+
+                        <p:submenu class="menu" label="Gestion Operativa" rendered="#{viewPermisoUsuarioController.registro.secretaria}">
+                            <p:menuitem value="Postulantes" outcome="postulantes"/>
+                            <p:menuitem value="Docentes" outcome="docentes"/>
+                            <p:menuitem value="Justificativos Docentes" outcome="justificativos_docentes"/>
+                        </p:submenu>
+
                         <p:submenu class="menu" label="Gestion Docente" rendered="#{viewPermisoUsuarioController.registro.esDocente}">
                             <p:menuitem value="Confirmar Clase" outcome="confirmar_clase"/>
                             <p:menuitem value="Mis Materias" outcome="mis_planes_cursos"/>

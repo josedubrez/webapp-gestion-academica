@@ -3,6 +3,7 @@ package org.utic.webapp.gestion.controllers;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import org.primefaces.model.file.UploadedFile;
 import org.utic.webapp.gestion.entities.Alumno;
 import org.utic.webapp.gestion.entities.Malla;
 import org.utic.webapp.gestion.entities.DesercionAlumno;
@@ -16,6 +17,7 @@ public class DesercionAlumnoController extends AbstractCrudController<DesercionA
 
     private List<Alumno> comboAlumnos;
     private List<Malla> comboMallas;
+
 
     @PostConstruct
     public void init() {
@@ -36,4 +38,5 @@ public class DesercionAlumnoController extends AbstractCrudController<DesercionA
     public List<Malla> getComboMallas() {
         return comboMallas;
     }
+
 }

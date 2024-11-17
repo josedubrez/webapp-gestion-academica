@@ -3,9 +3,11 @@ package org.utic.webapp.gestion.controllers;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import org.primefaces.model.file.UploadedFile;
 import org.utic.webapp.gestion.entities.RequisitoDocente;
 import org.utic.webapp.gestion.entities.RequisitoDocenteDet;
 import org.utic.webapp.gestion.services.RequisitoDocenteDetService;
+import org.primefaces.model.file.UploadedFile;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import java.util.List;
 @ViewScoped
 public class RequisitoDocenteDetController extends AbstractCrudController<RequisitoDocenteDet>{
     private List<RequisitoDocente> comboRequisitosDocentes;
+
+    private UploadedFile file;
 
     @Override
     protected RequisitoDocenteDet createNewInstance() {
@@ -38,5 +42,15 @@ public class RequisitoDocenteDetController extends AbstractCrudController<Requis
 
     public String volverAPostulante() {
         return "postulantes?faces-redirect=true";
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+    public void setFile(UploadedFile file) {
+        this.file = file;
+        if (file != null){
+            super.seleccionado.setDirArchivo(this.file.getFileName());
+        }
     }
 }

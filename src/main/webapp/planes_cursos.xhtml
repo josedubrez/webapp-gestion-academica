@@ -167,7 +167,7 @@
                             </div>
                             <div class="field">
                                 <p:outputLabel for="docente">Docente</p:outputLabel>
-                                <p:selectOneMenu id="docente" value="#{planCursoController.seleccionado.docente}" required="true"
+                                <p:selectOneMenu id="docente" value="#{planCursoController.seleccionado.docente}"
                                                  filter="true" filterMatchMode="contains" filterNormalize="true">
                                     <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
                                     <f:selectItems value="#{planCursoController.comboDocentes}" var="combo"
@@ -213,7 +213,7 @@
                             </div>
                             <div class="field">
                                 <p:selectBooleanCheckbox id="aprobado" value="#{planCursoController.seleccionado.aprobado}" itemLabel="Aprobado"
-                                                         rendered="#{(planCursoController.seleccionado.id > 0)}"/>
+                                                         rendered="#{(planCursoController.seleccionado.id > 0) and viewPermisoUsuarioController.registro.secretaria}"/>
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>

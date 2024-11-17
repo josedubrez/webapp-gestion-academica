@@ -54,16 +54,15 @@
                         <h:outputText value="#{registro.docente.nombre} #{registro.docente.apellido}"/>
                     </p:column>
 
-
                     <p:column headerText="Fecha Inicio" sortBy="#{registro.fecha_ini}" filterBy="#{registro.fecha_ini}">
                         <h:outputText value="#{registro.fecha_ini}">
-                            <f:convertDateTime type="LocalDateTime" pattern="yyyy.MM.dd 'at' HH:mm:ss"/>
+                            <f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm"/>
                         </h:outputText>
                     </p:column>
 
                     <p:column headerText="Fecha Fin" sortBy="#{registro.fecha_fin}" filterBy="#{registro.fecha_fin}">
                         <h:outputText value="#{registro.fecha_fin}">
-                            <f:convertDateTime type="LocalDateTime" pattern="yyyy.MM.dd 'at' HH:mm:ss"/>
+                            <f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm"/>
                         </h:outputText>
                     </p:column>
 
@@ -116,27 +115,15 @@
                                 </p:selectOneMenu>
                             </div>
 
-
                             <div class="field">
-                                <h:outputLabel for="fecha_ini" value="Fecha Incio" />
-                                <p:datePicker pattern="dd/mm/yy HH24:MI" id="fecha_ini" value="#{reemplazoDocenteController.seleccionado.fecha_ini}"
-                                              required="true"
-                                              converterMessage="Indique la fecha con dd/mm/yy HH24:MI" >
-                                    <f:convertDateTime type="LocalDateTime" pattern="yyyy.MM.dd 'at' HH:mm:ss z"/>
-                                    <f:passThroughAttribute name="type" value="datetime"/>
-                                </p:datePicker>
+                                <p:outputLabel for="fecha_ini">Fecha Inicial</p:outputLabel>
+                                <p:datePicker id="fecha_ini" value="#{reemplazoDocenteController.seleccionado.fecha_ini}"  pattern="dd/MM/yyyy HH:mm" />
                             </div>
 
                             <div class="field">
-                                <h:outputLabel for="fecha_fin" value="Fecha Fin" />
-                                <p:datePicker pattern="dd/mm/yy HH24:MI" id="fecha_fin" value="#{reemplazoDocenteController.seleccionado.fecha_fin}"
-                                              required="true"
-                                              converterMessage="Indique la fecha con dd/MM/yy HH24:MI" >
-                                    <f:convertDateTime type="LocalDateTime" pattern="dyyyy.MM.dd 'at' HH:mm:ss z"/>
-                                    <f:passThroughAttribute name="type" value="datetime"/>
-                                </p:datePicker>
+                                <p:outputLabel for="fecha_fin">Fecha Final</p:outputLabel>
+                                <p:datePicker id="fecha_fin" value="#{reemplazoDocenteController.seleccionado.fecha_fin}"  pattern="dd/MM/yyyy HH:mm" />
                             </div>
-
                         </p:outputPanel>
                     </p:outputPanel>
 

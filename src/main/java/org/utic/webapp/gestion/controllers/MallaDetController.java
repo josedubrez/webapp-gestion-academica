@@ -50,4 +50,8 @@ public class MallaDetController extends AbstractCrudController<MallaDet>{
     public String irATemarios() {
         return "temarios?faces-redirect=true";
     }
+
+    public String irAReferenciales() {
+        return "referenciales?faces-redirect=true";
+    }
 }

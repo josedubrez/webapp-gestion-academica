@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "permisos_docentes")
@@ -19,7 +20,11 @@ public class PermisoDocente extends AbstractEntity<PermisoDocente>{
     @NotEmpty
     private String motivo;
 
+    @Column(name = "fecha_alta")
     private LocalDate fecha;
+
+    private LocalDateTime fecha_ini;
+    private LocalDateTime fecha_fin;
 
     @Column(name = "dir_archivo")
     private String dirArchivo;
@@ -63,5 +68,21 @@ public class PermisoDocente extends AbstractEntity<PermisoDocente>{
 
     public void setDirArchivo(String dirArchivo) {
         this.dirArchivo = dirArchivo;
+    }
+
+    public LocalDateTime getFecha_ini() {
+        return fecha_ini;
+    }
+
+    public void setFecha_ini(LocalDateTime fecha_ini) {
+        this.fecha_ini = fecha_ini;
+    }
+
+    public LocalDateTime getFecha_fin() {
+        return fecha_fin;
+    }
+
+    public void setFecha_fin(LocalDateTime fecha_fin) {
+        this.fecha_fin = fecha_fin;
     }
 }

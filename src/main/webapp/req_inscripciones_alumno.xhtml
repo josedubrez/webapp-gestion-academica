@@ -88,7 +88,7 @@
                 </p:dataTable>
             </h:form>
 
-            <h:form id="dialogs">
+            <h:form id="dialogs" enctype="multipart/form-data">
                 <p:dialog header="#{reqInscripcionAlumnoController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
                           responsive="true">
                     <p:outputPanel id="manage-content" class="ui-fluid">
@@ -114,10 +114,8 @@
                                     <f:converter binding="#{requisitoConverter}"/>
                                 </p:selectOneMenu>
                             </div>
-
                             <div class="field">
-                                <p:outputLabel for="dir_archivo">Archivo</p:outputLabel>
-                                <p:inputText id="dir_archivo" value="#{reqInscripcionAlumnoController.seleccionado.dirArchivo}"/>
+                                <p:fileUpload id="dir_archivo" value="#{reqInscripcionAlumnoController.file}" mode="simple" skinSimple="true"/>
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>

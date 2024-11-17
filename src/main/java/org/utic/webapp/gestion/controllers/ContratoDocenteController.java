@@ -5,6 +5,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import org.utic.webapp.gestion.entities.ContratoDocente;
 import org.utic.webapp.gestion.services.ContratoDocenteService;
+import org.primefaces.model.file.UploadedFile;
 
 @Named
 @ViewScoped
@@ -13,7 +14,7 @@ public class ContratoDocenteController extends AbstractCrudController<ContratoDo
     protected ContratoDocente createNewInstance() {
         return new ContratoDocente();
     }
-
+    private UploadedFile file;
     @PostConstruct
     public void init() {
         ContratoDocenteService cds = (ContratoDocenteService) super.servicio;
@@ -29,5 +30,14 @@ public class ContratoDocenteController extends AbstractCrudController<ContratoDo
 
     public String volverADocente() {
         return "docentes?faces-redirect=true";
+    }
+    public UploadedFile getFile() {
+        return file;
+    }
+    public void setFile(UploadedFile file) {
+        this.file = file;
+        if (file != null){
+            super.seleccionado.setDirArchivo(this.file.getFileName());
+        }
     }
 }

@@ -15,9 +15,8 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
 
     private Boolean secretaria;
     private Boolean coordinacion;
+    private Boolean directivo;
 
-    private Boolean documental;
-    private Boolean operativo;
     private Boolean conectado;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,21 +63,6 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
         this.referencial = referencial;
     }
 
-    public Boolean getDocumental() {
-        return documental;
-    }
-
-    public void setDocumental(Boolean documental) {
-        this.documental = documental;
-    }
-
-    public Boolean getOperativo() {
-        return operativo;
-    }
-
-    public void setOperativo(Boolean operativo) {
-        this.operativo = operativo;
-    }
 
     public Boolean getConectado() {
         return conectado;
@@ -114,5 +98,13 @@ public class ViewPermisoUsuario extends AbstractEntity<ViewPermisoUsuario>{
 
     public void setCoordinacion(Boolean coordinacion) {
         this.coordinacion = coordinacion;
+    }
+
+    public Boolean getDirectivo() {
+        return directivo;
+    }
+
+    public void setDirectivo(Boolean directivo) {
+        this.directivo = directivo;
     }
 }
