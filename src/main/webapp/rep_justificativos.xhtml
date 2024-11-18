@@ -13,7 +13,7 @@
                 <p:growl id="messages" showDetail="true"/>
 
                 <div class="header grid justify-content-center">
-                    <h1 style="margin: 0.5rem">REPORTE DE CRONOGRAMAS</h1>
+                    <h1 style="margin: 0.5rem">JUSTIFICATIVOS Y PERMISOS DOCENTES</h1>
                 </div>
 
                 <p:divider />
@@ -30,44 +30,35 @@
 
                 <p:outputPanel id="manage-content" class="ui-fluid" style="col-12 md:col-4">
                     <div class="field">
-                        <p:outputLabel for="malla">Malla *</p:outputLabel>
-                        <p:selectOneMenu id="malla" value="#{reporteCronograma.filtro.malla}"
-                                         filter="true" filterMatchMode="contains" filterNormalize="true">
-                            <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                            <f:selectItems value="#{reporteCronograma.comboMallas}" var="combo"
-                                           itemLabel="#{combo.descripcion}" itemValue="#{combo}"/>
-                            <f:converter binding="#{mallaConverter}"/>
-                        </p:selectOneMenu>
+                        <h:outputLabel for="fecha_desde" value="Fecha Desde *" />
+                        <p:datePicker pattern="yyyy-MM-dd" id="fecha_desde" value="#{reporteJustificativos.filtro.fechaDesde}"
+                                      converterMessage="Indique la fecha con yyyy-MM-dd" >
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                            <f:passThroughAttribute name="type" value="date"/>
+                        </p:datePicker>
                     </div>
                     <div class="field">
-                        <p:outputLabel for="nro_semestre">Nro Semestre *</p:outputLabel>
-                        <p:spinner id="nro_semestre" min="1" max="20" value="#{reporteCronograma.filtro.nroSemestre}" />
-                    </div>
-                    <div class="field">
-                        <p:outputLabel for="plan_curso">Plan Curso</p:outputLabel>
-                        <p:selectOneMenu id="plan_curso" value="#{reporteCronograma.filtro.planCurso}"
-                                         filter="true" filterMatchMode="contains" filterNormalize="true">
-                            <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                            <f:selectItems value="#{reporteCronograma.comboPlanesCursos}" var="combo"
-                                           itemLabel="#{combo.desc}" itemValue="#{combo}"/>
-                            <f:converter binding="#{planCursoConverter}"/>
-                        </p:selectOneMenu>
+                        <h:outputLabel for="fecha_hasta" value="Fecha Hasta *" />
+                        <p:datePicker pattern="yyyy-MM-dd" id="fecha_hasta" value="#{reporteJustificativos.filtro.fechaHasta}"
+                                      converterMessage="Indique la fecha con yyyy-MM-dd" >
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                            <f:passThroughAttribute name="type" value="date"/>
+                        </p:datePicker>
                     </div>
                     <div class="field">
                         <p:outputLabel for="docente">Docente</p:outputLabel>
-                        <p:selectOneMenu id="docente" value="#{reporteCronograma.filtro.docente}"
+                        <p:selectOneMenu id="docente" value="#{reporteJustificativos.filtro.docente}"
                                          filter="true" filterMatchMode="contains" filterNormalize="true">
                             <f:selectItem itemLabel="---sin asignar---" itemValue="#{null}"/>
-                            <f:selectItems value="#{reporteCronograma.comboDocentes}" var="combo"
+                            <f:selectItems value="#{reporteJustificativos.comboDocentes}" var="combo"
                                            itemLabel="#{combo.desc}" itemValue="#{combo}"/>
                             <f:converter binding="#{docenteConverter}"/>
                         </p:selectOneMenu>
                     </div>
-
                     <p:divider />
                     <div class="field">
                         <p:commandButton class="col-3" value="Generar Reporte"
-                                         actionListener="#{reporteCronograma.generar}" ajax="false"
+                                         actionListener="#{reporteJustificativos.generar}" ajax="false"
                                          styleClass="ui-button-info w-full" style="margin-bottom: 2rem"
                         />
                     </div>

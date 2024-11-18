@@ -12,6 +12,8 @@ public class ReportFilter {
     private Integer nroSemestre;
     private Malla malla;
     private MallaDet mallaDet;
+    private Sede sede;
+    private Turno turno;
     private Docente docente;
     private PlanCurso planCurso;
     private Alumno alumno;
@@ -78,5 +80,21 @@ public class ReportFilter {
 
     public void setNroSemestre(Integer nroSemestre) {
         this.nroSemestre = nroSemestre;
+    }
+
+    public Sede getSede() {
+        return sede;
+    }
+
+    public void setSede(Sede sede) {
+        this.sede = sede;
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
     }
 }

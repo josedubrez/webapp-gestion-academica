@@ -21,6 +21,12 @@
             #menu_principal .menu h3:hover {
                 background-color: var(--bluegray-800);
             }
+            #menu_principal .menu.menu-f1 h3 {
+                background-color: var(--teal-900);
+            }
+            #menu_principal .menu.menu-f1 h3:hover {
+                background-color: var(--teal-800);
+            }
             .main-header {
                 background: var(--bluegray-900);
             }
@@ -117,6 +123,11 @@
                             <p:menuitem value="Asistencias" outcome="rep_asistencias" />
                             <p:menuitem value="Cronogramas" outcome="rep_cronograma" />
                             <p:menuitem value="Contratos" outcome="rep_contrato" />
+                            <p:menuitem value="Calificaciones" outcome="rep_calificaciones" />
+                            <p:menuitem value="Justificativos y Permisos Docentes" outcome="rep_justificativos" />
+                        </p:submenu>
+                        <p:submenu class="menu menu-f1" label="Ayuda">
+                            <p:menuitem value="Manual de Usuario" url="manual_usuario_san_isidro.pdf" target="_blank"/>
                         </p:submenu>
                     </p:panelMenu>
                 </div>
