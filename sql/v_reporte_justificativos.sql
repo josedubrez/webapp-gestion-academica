@@ -11,6 +11,7 @@ from (
 		select
 			jd.fecha as fecha,
 			d.id as id_docente,
+			to_char(jd.fecha,'dd/mm/yyyy') as desc_fecha,
 			'(' || d.nro_cedula || ') ' || d.apellido || ', ' || d.nombre as desc_docente,
 			'JUSTIFICATIVO: ' || jd.motivo as desc_motivo,
 			jd.dir_archivo as dir_archivo
@@ -20,6 +21,7 @@ from (
 		select
 			pd.fecha_ini as fecha,
 			d.id as id_docente,
+			to_char(pd.fecha_ini,'dd/mm/yyyy') as desc_fecha,
 			'(' || d.nro_cedula || ') ' || d.apellido || ', ' || d.nombre as desc_docente,
 			'PERMISO: ' || pd.motivo as desc_motivo,
 			pd.dir_archivo as dir_archivo
