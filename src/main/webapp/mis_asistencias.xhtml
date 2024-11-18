@@ -59,7 +59,63 @@
                     <p:column headerText="Presente">
                         <h:outputText value="#{registro.presente ? 'SI' : 'NO'}"/>
                     </p:column>
+
+                    <p:column headerText="Observacion" filterBy="#{registro.observacion}">
+                        <h:outputText value="#{registro.observacion}"/>
+                    </p:column>
+
+                    <p:column exportable="false" ariaHeaderText="Actions">
+                        <div class="grid justify-content-center">
+                            <p:commandButton icon="pi pi-pencil" update=":dialogs :dialogs:manage-content" style="margin: 0.25rem"
+                                             oncomplete="PF('manageDialog').show()"
+                                             styleClass="edit-button rounded-button ui-button-success"
+                                             title="Editar"
+                                             process="@this">
+                                <f:setPropertyActionListener value="#{registro}" target="#{asistenciaAlumnoController.seleccionado}"/>
+                                <p:resetInput target=":dialogs:manage-content"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
                 </p:dataTable>
+            </h:form>
+
+            <h:form id="dialogs">
+                <p:dialog header="#{asistenciaAlumnoController.seleccionado.id > 0 ? 'Editar' : 'Nuevo'} Registro" showEffect="fade" modal="true" widgetVar="manageDialog"
+                          responsive="true">
+                    <p:outputPanel id="manage-content" class="ui-fluid">
+                        <p:outputPanel rendered="#{not empty asistenciaAlumnoController.seleccionado}">
+                            <div class="field">
+                                <p:selectBooleanCheckbox id="presente" value="#{asistenciaAlumnoController.seleccionado.presente}" itemLabel="Presente"
+                                                         rendered="#{(asistenciaAlumnoController.seleccionado.id > 0)}"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="observacion">Observacion</p:outputLabel>
+                                <p:inputText id="observacion" value="#{asistenciaAlumnoController.seleccionado.observacion}"/>
+                            </div>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Grabar" icon="pi pi-check" actionListener="#{asistenciaAlumnoController.save}"
+                                         update="manage-content" process="manage-content @this"/>
+                        <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageDialog').hide()"
+                                         class="ui-button-secondary" type="button"/>
+                    </f:facet>
+                </p:dialog>
+
+                <p:confirmDialog widgetVar="deleteDialog" showEffect="fade" width="300"
+                                 message="Seguro que desea eliminar el registro?" header="Confirmacion" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{asistenciaAlumnoController.delete}"
+                                     process="@this" oncomplete="PF('deleteDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteDialog').hide()"/>
+                </p:confirmDialog>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
             </h:form>
         </div>
 

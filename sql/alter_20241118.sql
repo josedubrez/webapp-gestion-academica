@@ -1,0 +1,1 @@
+alter table asistencias_alumnos add column observacion varchar(255);

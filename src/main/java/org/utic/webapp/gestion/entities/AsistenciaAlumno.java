@@ -20,6 +20,8 @@ public class AsistenciaAlumno extends AbstractEntity<AsistenciaAlumno>{
 
     private Boolean presente;
 
+    private String observacion;
+
     @Override
     public Long getId() {
         return id;
@@ -51,5 +53,13 @@ public class AsistenciaAlumno extends AbstractEntity<AsistenciaAlumno>{
 
     public void setPresente(Boolean presente) {
         this.presente = presente;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 }
